@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;700&display=swap');
+
+@theme {
+  --font-display: "Arial Black", "Impact", "Anton", sans-serif;
+  --font-sans: "Helvetica Neue", Arial, "Inter", sans-serif;
+  
+  --color-brand-orange: #F97316;
+  --color-brand-blue: #38BDF8;
+  --color-coal: #0A0A0A;
+  --color-offwhite: #F8F8F5;
+}
+
+@layer base {
+  body {
+    @apply bg-coal text-offwhite font-sans selection:bg-brand-orange selection:text-coal antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display uppercase tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-outline {
+    -webkit-text-stroke: 1px currentColor;
+    color: transparent;
+  }
+  
+  .grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="f"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23f)"/%3E%3C/svg%3E');
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .brutalist-border {
+    border: 2px solid var(--color-offwhite);
+  }
+
+  .scribble-box {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--color-brand-orange);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: rotate(15deg);
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .roots-tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 10px;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    background: var(--color-brand-blue);
+    color: var(--color-coal);
+    font-weight: 900;
+    z-index: 10;
+  }
+
+  .tag-strip {
+    background: var(--color-offwhite);
+    color: var(--color-coal);
+    padding: 8px;
+    font-size: 11px;
+    font-weight: 900;
+    transform: rotate(-2deg);
+    width: fit-content;
+  }
+}
+
+.brutalist-block {
+  @apply border-4 border-offwhite relative bg-coal;
+}
