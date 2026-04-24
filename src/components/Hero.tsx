@@ -18,9 +18,9 @@ export const Hero = () => {
         <div className="flex-1 bg-brand-orange p-6 flex flex-col justify-end relative overflow-hidden brutalist-border">
           <div className="absolute top-[10%] left-[10%] width-[80%] height-[70%] bg-coal border-4 border-offwhite -rotate-3 overflow-hidden">
              <img 
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2788&auto=format&fit=crop" 
+              src="/main_pic.png" 
               alt="Joshua Bacha"
-              className="w-full h-full object-cover grayscale brightness-75 contrast-125"
+              className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
           </div>
