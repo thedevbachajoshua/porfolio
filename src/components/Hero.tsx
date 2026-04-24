@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { MagneticButton } from './Shared';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
+import mainPic from '../assets/main_pic.png';
 
 export const Hero = () => {
   return (
@@ -18,7 +19,7 @@ export const Hero = () => {
         <div className="flex-1 bg-brand-orange p-6 flex flex-col justify-end relative overflow-hidden brutalist-border">
           <div className="absolute top-[10%] left-[10%] width-[80%] height-[70%] bg-coal border-4 border-offwhite -rotate-3 overflow-hidden">
              <img 
-              src="/main_pic.png" 
+              src={mainPic} 
               alt="Joshua Bacha"
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
