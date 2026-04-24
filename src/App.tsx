@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { ProofStrip } from './components/ProofStrip';
 import { ProjectShowcase } from './components/ProjectShowcase';
@@ -117,6 +118,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <Analytics />
     </div>
   );
 }
