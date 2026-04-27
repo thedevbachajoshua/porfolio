@@ -1,9 +1,10 @@
 import { motion } from 'motion/react';
 import { MagneticButton } from './Shared';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
-import mainPic from '../assets/main_pic.png';
+import assetsData from '../assets-data.json';
 
 export const Hero = () => {
+  const mainPic = assetsData.mainPic;
   return (
     <section className="relative min-h-screen bg-coal p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[300px_1fr_280px] grid-rows-[auto_1fr_80px] gap-3 md:gap-4 overflow-hidden">
       {/* Background Shapes for flair */}
