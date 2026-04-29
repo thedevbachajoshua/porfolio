@@ -19,7 +19,7 @@ export const Collaboration = () => {
         </p>
 
         <div className="flex flex-wrap justify-center gap-6 mt-8">
-          <MagneticButton className="!bg-deep-orange !text-white !shadow-[4px_4px_0px_0px_rgba(4,116,186,1)]">Contact Me</MagneticButton>
+          <MagneticButton className="!bg-deep-orange !text-white !shadow-[3px_3px_0px_0px_rgba(4,116,186,1)]">Contact Me</MagneticButton>
           <a 
             href="mailto:mbabachajoshua@gmail.com" 
             className="flex items-center gap-2 font-display text-2xl uppercase hover:text-deep-blue transition-colors underline underline-offset-8 decoration-deep-blue/30 hover:decoration-deep-blue"

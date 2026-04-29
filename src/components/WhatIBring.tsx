@@ -28,7 +28,7 @@ export const WhatIBring = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Creative Column */}
-        <div className="bg-white p-12 text-coal brutalist-block shadow-[4px_4px_0px_0px_rgba(241,119,32,0.3)] border-deep-orange/10">
+        <div className="bg-white p-12 text-coal brutalist-block shadow-[3px_3px_0px_0px_rgba(241,119,32,0.3)] border-deep-orange/10">
           <h3 className="text-4xl md:text-5xl mb-12 flex items-center justify-between">
             Creative 
             <span className="w-12 h-12 bg-amber/10 border border-deep-orange rounded-full" />

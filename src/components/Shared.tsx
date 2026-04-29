@@ -32,7 +32,7 @@ export const MagneticButton = ({ children, className = "" }: { children: React.R
     <motion.button
       whileHover={{ scale: 1.02, x: -2, y: -2 }}
       whileTap={{ scale: 0.98 }}
-      className={`relative px-8 py-4 bg-coal text-white font-black uppercase text-xs border border-deep-blue/20 shadow-[4px_4px_0px_0px_rgba(4,116,186,1)] hover:bg-deep-orange transition-all duration-300 cursor-pointer ${className}`}
+      className={`relative px-8 py-4 bg-coal text-white font-black uppercase text-xs border border-deep-blue/20 shadow-[3px_3px_0px_0px_rgba(4,116,186,1)] hover:bg-deep-orange transition-all duration-300 cursor-pointer ${className}`}
     >
       <span className="flex items-center gap-2">
         {children}

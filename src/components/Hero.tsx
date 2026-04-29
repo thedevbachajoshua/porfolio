@@ -6,7 +6,7 @@ import assetsData from '../assets-data.json';
 export const Hero = () => {
   const mainPic = assetsData.mainPic;
   return (
-    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[300px_1fr_280px] grid-rows-[auto_1fr_80px] gap-3 md:gap-4 overflow-hidden">
+    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[225px_1fr_210px] grid-rows-[auto_1fr_60px] gap-3 md:gap-4 overflow-hidden">
       {/* Background Shapes for flair */}
       <div className="absolute top-1/4 -right-20 w-[40vw] h-[40vw] bg-deep-orange/5 rounded-full blur-[120px] -z-10" />
 
@@ -46,7 +46,7 @@ export const Hero = () => {
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.8 }}
         >
-          <h1 className="text-[10vw] md:text-[110px] leading-[1] md:leading-[0.95] mb-8 font-display text-coal">
+          <h1 className="text-[10vw] md:text-[82px] leading-[1] md:leading-[0.95] mb-8 font-display text-coal">
             Your Favourite<br />
             <span className="text-sky-blue">18 y/o</span><br />
             <span className="bg-deep-orange text-white px-2 md:px-4 leading-normal inline-block mt-2">FAILING IN PUBLIC</span>
@@ -84,7 +84,7 @@ export const Hero = () => {
         <motion.div 
           animate={{ x: [0, -2000] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="flex whitespace-nowrap text-5xl md:text-[42px] font-display opacity-80 px-5"
+          className="flex whitespace-nowrap text-5xl md:text-[32px] font-display opacity-80 px-5"
         >
           {[...Array(20)].map((_, i) => (
             <span key={i} className="mr-20">FOUNDER. BUILDER. STORYTELLER. PROUD AFRICAN.</span>

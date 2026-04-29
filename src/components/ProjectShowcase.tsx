@@ -45,7 +45,7 @@ export const ProjectShowcase = () => {
             <div className={`lg:col-span-7 relative group ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
               <motion.div 
                 whileHover={{ scale: 0.98, x: -2, y: -2 }}
-                className="relative aspect-video overflow-hidden border border-deep-blue/10 cursor-pointer bg-muted shadow-[8px_8px_0px_0px_rgba(4,116,186,0.3)] transition-all"
+                className="relative aspect-video overflow-hidden border border-deep-blue/10 cursor-pointer bg-muted shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-all"
               >
                 <img 
                   src={project.image} 

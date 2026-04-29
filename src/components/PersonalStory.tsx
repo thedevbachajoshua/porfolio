@@ -36,7 +36,7 @@ export const PersonalStory = () => {
               Failure is part of the system. I'm building in public to show everything in between.
             </p>
           </div>
-          <div className="md:col-span-7 flex flex-col gap-4 p-6 md:p-8 brutalist-block bg-paper shadow-[3px_3px_0px_0px_rgba(241,119,32,0.3)] border-amber/20">
+          <div className="md:col-span-7 flex flex-col gap-4 p-6 md:p-8 brutalist-block bg-paper shadow-[2.25px_2.25px_0px_0px_rgba(241,119,32,0.3)] border-amber/20">
             <h3 className="text-2xl md:text-3xl font-display uppercase text-coal">The Foundation</h3>
             <p className="text-base md:text-lg leading-snug">
               Before media and brand building, I developed my execution mindset through robotics and technical problem solving. 

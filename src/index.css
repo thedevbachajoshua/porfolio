@@ -17,6 +17,10 @@
 }
 
 @layer base {
+  html {
+    font-size: 12px;
+  }
+
   body {
     @apply bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden;
   }
