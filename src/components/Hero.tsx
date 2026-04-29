@@ -34,19 +34,12 @@ export const Hero = () => {
           <p className="text-sm italic leading-relaxed text-coal/70">
             "I blend cinematic storytelling, founder energy, and technical thinking to build what matters."
           </p>
-          <a 
-            href="#contact"
-            className="mt-4 w-full py-3 bg-coal text-white font-black uppercase text-center text-xs hover:bg-deep-orange transition-colors cursor-pointer shadow-[2px_2px_0px_0px_rgba(4,116,186,1)]"
-          >
-            WORK WITH ME
-          </a>
         </div>
       </aside>
 
       {/* Hero Central Pane */}
       <main className="relative bg-white brutalist-block p-8 md:p-12 flex flex-col justify-center overflow-hidden">
         <div className="scribble-box top-10 left-20" />
-        <div className="roots-tag bg-deep-blue text-platinum">ENGINEERING ROOTS // SYSTEMS THINKER</div>
         
         <motion.div
            initial={{ opacity: 0, y: 30 }}
@@ -59,9 +52,13 @@ export const Hero = () => {
             <span className="bg-deep-orange text-white px-2 md:px-4 leading-normal inline-block mt-2">FAILING IN PUBLIC</span>
           </h1>
           
-          <p className="max-w-md text-base md:text-lg text-coal/60 leading-relaxed font-medium">
-            A live record of ambition, mistakes, and everything in between.
-          </p>
+          <div className="max-w-md">
+            <p className="text-base md:text-lg text-coal/60 leading-relaxed font-medium">
+              A live record of ambition, mistakes, and everything in between.
+            </p>
+          </div>
+
+          <span className="absolute bottom-6 right-8 text-sm md:text-base font-black opacity-20 whitespace-nowrap tracking-tighter select-none">EST. 2008</span>
 
           <div className="flex gap-4 mt-8">
             <a href="https://www.instagram.com/thebachajoshua/" className="w-12 h-12 border border-deep-blue/20 flex items-center justify-center hover:bg-deep-orange hover:text-white transition-all shadow-sm">
@@ -79,44 +76,7 @@ export const Hero = () => {
 
       {/* Sidebar Right */}
       <aside className="hidden lg:flex flex-col gap-4">
-        <div className="bg-white text-coal p-6 border border-deep-blue/10">
-          <h3 className="text-2xl mb-4 border-b border-muted pb-2">TRACK RECORD</h3>
-          <div className="flex flex-col gap-3">
-             <div className="flex justify-between text-[11px] font-black italic text-coal/80">
-               <span>WRO NATIONAL FINALIST</span>
-               <span>'25</span>
-             </div>
-             <div className="flex justify-between text-[11px] font-black italic text-coal/80">
-               <span>ACITY TECH EXPO WINNER</span>
-               <span>'25</span>
-             </div>
-             <div className="flex justify-between text-[11px] font-black italic text-coal/80">
-               <span>NOVA GENESIS FOUNDED</span>
-               <span>'26</span>
-             </div>
-             <div className="flex justify-between text-[11px] font-black italic text-coal/80">
-               <span>PRESEC ROBOTICS PRES.</span>
-               <span>'24</span>
-             </div>
-          </div>
-        </div>
-
-        <div className="flex-1 bg-sky-blue/5 text-coal p-6 flex flex-col justify-between border border-deep-blue/10 overflow-hidden relative group cursor-pointer hover:bg-sky-blue/10 transition-colors">
-          <div>
-            <h4 className="text-2xl">NOVA GENESIS</h4>
-            <p className="text-[10px] mt-1 font-bold leading-tight text-coal/60">PREMIUM CONTENT STUDIO FOR AMBITIOUS BRANDS.</p>
-          </div>
-          <div className="h-20 bg-sky-blue/10 my-4 group-hover:bg-sky-blue/20 transition-colors" />
-          <span className="text-[10px] text-right font-black">VIEW CASE STUDY →</span>
-        </div>
-
-        <div className="flex-1 bg-white text-coal p-6 flex flex-col justify-between border border-deep-blue/10 overflow-hidden relative group cursor-pointer hover:shadow-md transition-all">
-          <div>
-            <h4 className="text-2xl">YOUTUBE</h4>
-            <p className="text-[10px] mt-1 font-bold leading-tight text-coal/60">DOCUMENTING AFRICAN INNOVATION & AMBITION.</p>
-          </div>
-          <span className="mt-auto text-[10px] text-right font-black">WATCH CHANNEL →</span>
-        </div>
+        {/* Sidebar content removed per user request */}
       </aside>
 
       {/* Signal Strip (Footer of Hero) */}
