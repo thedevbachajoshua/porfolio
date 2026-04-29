@@ -17,7 +17,7 @@ export const PersonalStory = () => {
         <SectionHeader 
           number="03" 
           title="Personal Story" 
-          subtitle="Documenting the process, not just the outcome. Failure is part of the system."
+          subtitle="Joshua Bacha // The Human Element"
           className="!mb-6 md:!mb-10"
           numberColor="text-deep-orange"
         />
@@ -27,23 +27,32 @@ export const PersonalStory = () => {
           <span className="text-deep-orange text-[3.5rem] md:text-[5.5rem]">NOT JUST THE OUTCOME.</span>
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
-          <div className="md:col-span-5 flex flex-col gap-6 text-xl md:text-2xl font-bold leading-tight">
-            <p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-12">
+          <div className="lg:col-span-5 flex flex-col gap-8 text-2xl md:text-4xl font-black leading-[0.9] tracking-tighter uppercase italic py-4">
+            <p className="text-coal">
               Young builder from Ghana. Driven by ambition, cinema, culture, and creation.
             </p>
-            <p className="text-sky-blue">
+            <p className="text-deep-orange/60">
               Failure is part of the system. I'm building in public to show everything in between.
             </p>
           </div>
-          <div className="md:col-span-7 flex flex-col gap-4 p-6 md:p-8 brutalist-block bg-paper shadow-[2.25px_2.25px_0px_0px_rgba(241,119,32,0.3)] border-amber/20">
-            <h3 className="text-2xl md:text-3xl font-display uppercase text-coal">The Foundation</h3>
-            <p className="text-base md:text-lg leading-snug">
-              Before media and brand building, I developed my execution mindset through robotics and technical problem solving. 
-            </p>
-            <p className="text-base md:text-lg leading-snug text-coal/60">
-              Developing hardware prototypes and autonomous systems taught me how to solve complex problems under constraints. That technical foundation now powers every story I tell.
-            </p>
+          
+          <div className="lg:col-span-7 flex flex-col gap-10 p-8 md:p-16 brutalist-block bg-[#FDFCFB] shadow-[4px_4px_0px_0px_rgba(241,119,32,0.15)] border-amber/10 relative group">
+            <div className="absolute top-0 right-0 p-4 font-black text-[10px] opacity-20 tracking-widest">SEC_03_FND</div>
+            
+            <div className="relative">
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-deep-blue/40 block mb-6">Execution Mindset</span>
+              <h3 className="text-4xl md:text-6xl font-display uppercase text-coal leading-[0.85] mb-8">The<br />Foundation</h3>
+            </div>
+            
+            <div className="flex flex-col gap-8 border-l-2 border-deep-orange/20 pl-8">
+              <p className="text-xl md:text-2xl leading-tight font-bold text-coal/80 tracking-tight">
+                Before media and brand building, I developed my execution mindset through robotics and technical problem solving. 
+              </p>
+              <p className="text-lg md:text-xl leading-relaxed text-coal/50 font-medium">
+                Developing hardware prototypes through collaboration taught me how to solve complex problems under constraints. That technical foundation now powers what I do.
+              </p>
+            </div>
           </div>
         </div>
 

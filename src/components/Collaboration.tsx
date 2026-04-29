@@ -10,22 +10,21 @@ export const Collaboration = () => {
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center gap-8">
-        <h2 className="text-6xl md:text-9xl font-display leading-[0.8]">
-          IF YOU’RE BUILDING <br /> MEANINGFUL <br /> <span className="text-deep-orange">LET'S TALK</span>
+        <h2 className="text-6xl md:text-9xl font-display leading-[0.8] mb-4">
+          IF YOU’RE BUILDING <br /> <span className="text-deep-orange italic">LEGACY</span> <br /> LET'S TALK
         </h2>
         
         <p className="text-xl md:text-3xl font-medium tracking-tight text-coal/60 max-w-2xl">
-          Open to partnerships, projects, speaking opportunities, creative collaborations, and ambitious ideas.
+          Open to partnerships, projects, and ambitious ideas.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-6 mt-8">
-          <MagneticButton className="!bg-deep-orange !text-white !shadow-[3px_3px_0px_0px_rgba(4,116,186,1)]">Contact Me</MagneticButton>
-          <a 
-            href="mailto:mbabachajoshua@gmail.com" 
-            className="flex items-center gap-2 font-display text-2xl uppercase hover:text-deep-blue transition-colors underline underline-offset-8 decoration-deep-blue/30 hover:decoration-deep-blue"
+        <div className="flex flex-wrap justify-center gap-6 mt-4">
+          <MagneticButton 
+            className="!bg-deep-orange !text-white !shadow-[3px_3px_0px_0px_rgba(4,116,186,1)]"
+            onClick={() => document.getElementById('site-footer')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Email Joshua
-          </a>
+            Contact Me
+          </MagneticButton>
         </div>
       </div>
     </section>
@@ -36,22 +35,22 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="py-24 px-6 md:px-12 bg-paper text-coal border-t border-deep-blue/10">
+    <footer id="site-footer" className="py-24 px-6 md:px-12 bg-paper text-coal border-t border-deep-blue/10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
-        <div className="md:col-span-6 flex flex-col gap-6">
-          <h2 className="text-5xl md:text-7xl font-display tracking-tighter">JOSHUA BACHA</h2>
+        <div className="md:col-span-8 flex flex-col gap-6">
+          <h2 className="text-5xl md:text-7xl font-display tracking-tighter text-deep-orange">JOSHUA BACHA</h2>
           <div className="flex items-center gap-2 text-sm font-bold opacity-60">
             <MapPin className="w-4 h-4" />
             <span>ACCRA, GHANA</span>
           </div>
-          <p className="text-lg font-medium max-w-xs opacity-70">
+          <p className="text-lg font-medium max-w-md opacity-70">
             Building stories, systems, and futures from the heart of Africa.
           </p>
         </div>
 
-        <div className="md:col-span-3 flex flex-col gap-6">
-          <span className="text-xs font-bold uppercase tracking-widest opacity-40">Contact</span>
-          <a href="mailto:mbabachajoshua@gmail.com" className="text-xl font-bold hover:text-deep-orange transition-colors">
+        <div className="md:col-span-4 flex flex-col gap-6 items-start md:items-end">
+          <span className="text-xs font-bold uppercase tracking-widest opacity-40">Get in touch</span>
+          <a href="mailto:mbabachajoshua@gmail.com" className="text-xl md:text-2xl font-bold hover:text-deep-orange transition-colors">
             mbabachajoshua@gmail.com
           </a>
           <div className="flex gap-4">
@@ -66,16 +65,6 @@ export const Footer = () => {
             </a>
           </div>
         </div>
-
-        <div className="md:col-span-3 flex flex-col gap-6">
-          <span className="text-xs font-bold uppercase tracking-widest opacity-40">Identity</span>
-          <ul className="flex flex-col gap-2 font-display text-lg">
-            <li className="hover:text-deep-orange cursor-pointer">Selected Work</li>
-            <li className="hover:text-deep-blue cursor-pointer">Track Record</li>
-            <li className="hover:text-deep-orange cursor-pointer">Engineering</li>
-            <li className="hover:text-deep-blue cursor-pointer">Archive</li>
-          </ul>
-        </div>
       </div>
 
       <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-deep-blue/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold uppercase tracking-widest opacity-40">
@@ -84,7 +73,7 @@ export const Footer = () => {
         <span>Built with intent in Ghana.</span>
         <span className="flex gap-2 items-center">
             <span className="w-2 h-2 bg-amber animate-pulse" />
-            SYSTEM_ONLINE_v2.0
+            EST. 2008
         </span>
       </div>
     </footer>

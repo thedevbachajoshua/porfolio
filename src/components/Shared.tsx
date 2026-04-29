@@ -27,11 +27,12 @@ export const SectionHeader = ({ number, title, subtitle, className = "", numberC
   );
 };
 
-export const MagneticButton = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
+export const MagneticButton = ({ children, className = "", onClick }: { children: React.ReactNode, className?: string, onClick?: () => void }) => {
   return (
     <motion.button
       whileHover={{ scale: 1.02, x: -2, y: -2 }}
       whileTap={{ scale: 0.98 }}
+      onClick={onClick}
       className={`relative px-8 py-4 bg-coal text-white font-black uppercase text-xs border border-deep-blue/20 shadow-[3px_3px_0px_0px_rgba(4,116,186,1)] hover:bg-deep-orange transition-all duration-300 cursor-pointer ${className}`}
     >
       <span className="flex items-center gap-2">

@@ -6,12 +6,12 @@ import assetsData from '../assets-data.json';
 export const Hero = () => {
   const mainPic = assetsData.mainPic;
   return (
-    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[225px_1fr_210px] grid-rows-[auto_1fr_60px] gap-3 md:gap-4 overflow-hidden">
+    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[225px_1fr] grid-rows-[auto_1fr_60px] gap-3 md:gap-4 overflow-hidden">
       {/* Background Shapes for flair */}
       <div className="absolute top-1/4 -right-20 w-[40vw] h-[40vw] bg-deep-orange/5 rounded-full blur-[120px] -z-10" />
 
       {/* Header Nav */}
-      <nav className="lg:col-span-3 bg-white text-coal flex items-center px-5 py-3 font-black uppercase text-sm border border-deep-blue/10">
+      <nav className="lg:col-span-2 bg-white text-coal flex items-center px-5 py-3 font-black uppercase text-sm border border-deep-blue/10">
         <div className="tracking-tighter">thebachajoshua™</div>
       </nav>
 
@@ -74,13 +74,8 @@ export const Hero = () => {
         </motion.div>
       </main>
 
-      {/* Sidebar Right */}
-      <aside className="hidden lg:flex flex-col gap-4">
-        {/* Sidebar content removed per user request */}
-      </aside>
-
       {/* Signal Strip (Footer of Hero) */}
-      <footer className="lg:col-span-3 bg-white text-coal flex items-center overflow-hidden brutalist-block h-20 shadow-none border-t border-deep-blue/10">
+      <footer className="lg:col-span-2 bg-white text-coal flex items-center overflow-hidden brutalist-block h-20 shadow-none border-t border-deep-blue/10">
         <motion.div 
           animate={{ x: [0, -2000] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}

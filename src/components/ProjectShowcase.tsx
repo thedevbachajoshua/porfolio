@@ -25,7 +25,7 @@ const PROJECTS = [
 
 export const ProjectShowcase = () => {
   return (
-    <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto bg-white">
+    <section className="py-24 px-6 md:px-12 bg-white w-full">
       <SectionHeader 
         number="01" 
         title="Selected Work" 
