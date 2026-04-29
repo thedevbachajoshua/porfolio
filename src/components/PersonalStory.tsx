@@ -17,14 +17,18 @@ export const PersonalStory = () => {
         <SectionHeader 
           number="03" 
           title="Personal Story" 
-          subtitle="Joshua Bacha // The Human Element"
+          subtitle=""
           className="!mb-6 md:!mb-10"
           numberColor="text-deep-orange"
         />
         
-        <h2 className="text-4xl md:text-[5.5rem] font-display leading-[1.1] md:leading-[1] mb-10 text-coal">
-          DOCUMENTING THE PROCESS, <br /> 
-          <span className="text-deep-orange text-[3.5rem] md:text-[5.5rem]">NOT JUST THE OUTCOME.</span>
+        <h2 className="flex flex-col gap-2 mb-12">
+          <span className="text-2xl md:text-4xl font-display leading-[0.9] text-deep-blue uppercase tracking-tighter">
+            Documenting the process,
+          </span>
+          <span className="text-xl md:text-3xl font-display leading-[0.9] text-deep-blue/40 uppercase tracking-tighter md:translate-x-12">
+            not just the outcome.
+          </span>
         </h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-12">
@@ -38,7 +42,6 @@ export const PersonalStory = () => {
           </div>
           
           <div className="lg:col-span-7 flex flex-col gap-10 p-8 md:p-16 brutalist-block bg-[#FDFCFB] shadow-[4px_4px_0px_0px_rgba(241,119,32,0.15)] border-amber/10 relative group">
-            <div className="absolute top-0 right-0 p-4 font-black text-[10px] opacity-20 tracking-widest">SEC_03_FND</div>
             
             <div className="relative">
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-deep-blue/40 block mb-6">Execution Mindset</span>

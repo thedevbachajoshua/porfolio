@@ -26,7 +26,7 @@ export const WhatIBring = () => {
         subtitle="A rare mix of creative taste and technical execution. Focused on delivering momentum."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-32">
         {/* Creative Column */}
         <div className="bg-white p-12 text-coal brutalist-block shadow-[3px_3px_0px_0px_rgba(241,119,32,0.3)] border-deep-orange/10">
           <h3 className="text-4xl md:text-5xl mb-12 flex items-center justify-between">

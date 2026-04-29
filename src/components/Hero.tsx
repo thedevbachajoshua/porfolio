@@ -6,7 +6,7 @@ import assetsData from '../assets-data.json';
 export const Hero = () => {
   const mainPic = assetsData.mainPic;
   return (
-    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[225px_1fr] grid-rows-[auto_1fr_60px] gap-3 md:gap-4 overflow-hidden">
+    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[225px_1fr] lg:grid-rows-[auto_1fr_60px] gap-3 md:gap-4 overflow-hidden">
       {/* Background Shapes for flair */}
       <div className="absolute top-1/4 -right-20 w-[40vw] h-[40vw] bg-deep-orange/5 rounded-full blur-[120px] -z-10" />
 
@@ -16,30 +16,28 @@ export const Hero = () => {
       </nav>
 
       {/* Sidebar Left */}
-      <aside className="hidden lg:flex flex-col gap-4">
-        <div className="flex-1 bg-amber/10 p-6 flex flex-col justify-end relative overflow-hidden border border-deep-blue/10">
-          <div className="absolute top-[10%] left-[10%] width-[80%] height-[70%] bg-white border border-deep-blue/20 -rotate-3 overflow-hidden shadow-sm">
+      <aside className="flex flex-col gap-4">
+        <div className="flex-1 bg-amber/10 p-6 flex flex-col justify-center items-center relative overflow-hidden border border-deep-blue/10">
+          <div className="w-full aspect-[4/5] bg-white border border-deep-blue/20 overflow-hidden shadow-sm relative">
              <img 
               src={mainPic} 
               alt="Joshua Bacha"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover scale-x-[-1]"
               referrerPolicy="no-referrer"
             />
           </div>
-          <h2 className="text-4xl text-coal leading-[0.9] mt-auto relative z-10 font-black">JOSHUA<br />BACHA</h2>
-          <div className="tag-strip mt-3 relative z-10 !bg-deep-orange">VISUAL STORYTELLER</div>
+          <h2 className="text-4xl text-coal leading-[0.9] mt-8 self-start relative z-10 font-black">JOSHUA<br />BACHA</h2>
         </div>
         
         <div className="brutalist-block p-6 bg-white">
-          <p className="text-sm italic leading-relaxed text-coal/70">
-            "I blend cinematic storytelling, founder energy, and technical thinking to build what matters."
+          <p className="text-lg italic leading-relaxed text-coal/70">
+            "Relentlessly resourceful problem-solver and collaborator dedicated to finding a way around constraints"
           </p>
         </div>
       </aside>
 
       {/* Hero Central Pane */}
       <main className="relative bg-white brutalist-block p-8 md:p-12 flex flex-col justify-center overflow-hidden">
-        <div className="scribble-box top-10 left-20" />
         
         <motion.div
            initial={{ opacity: 0, y: 30 }}

@@ -29,7 +29,7 @@ export const ProjectShowcase = () => {
       <SectionHeader 
         number="01" 
         title="Selected Work" 
-        subtitle="Premium project showcase—where cinematic vision meets strategic execution."
+        subtitle="Premium project showcase where cinematic vision meets strategic execution."
       />
 
       <div className="flex flex-col gap-32">

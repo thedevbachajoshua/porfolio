@@ -10,8 +10,8 @@ export const Collaboration = () => {
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center gap-8">
-        <h2 className="text-6xl md:text-9xl font-display leading-[0.8] mb-4">
-          IF YOU’RE BUILDING <br /> <span className="text-deep-orange italic">LEGACY</span> <br /> LET'S TALK
+        <h2 className="text-6xl md:text-8xl font-display leading-[0.8] mb-4">
+          IF YOU’RE BUILDING <br /> <span className="text-deep-orange italic">LEGACY</span> <br /><br /> LET'S TALK
         </h2>
         
         <p className="text-xl md:text-3xl font-medium tracking-tight text-coal/60 max-w-2xl">
