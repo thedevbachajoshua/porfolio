@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative bg-coal text-offwhite font-sans selection:bg-brand-orange selection:text-coal antialiased overflow-x-hidden">
+    <div className="relative bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden">
       <GrainOverlay />
       
       {/* Sticky Navbar - only shows after scroll past Hero */}
@@ -33,10 +33,10 @@ export default function App() {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             exit={{ y: -100 }}
-            className="fixed top-0 left-0 w-full z-[80] bg-offwhite/90 backdrop-blur-md py-4 text-coal border-b border-coal"
+            className="fixed top-0 left-0 w-full z-[80] bg-white/95 backdrop-blur-md py-4 text-coal border-b border-deep-blue/10 shadow-sm"
           >
             <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-              <div className="font-display text-2xl tracking-tighter uppercase">
+              <div className="font-display text-2xl tracking-tighter uppercase font-black">
                 thebachajoshua™
               </div>
 
@@ -45,21 +45,21 @@ export default function App() {
                   <a 
                     key={item} 
                     href={`#${item.toLowerCase()}`}
-                    className="hover:text-brand-orange transition-colors"
+                    className="hover:text-deep-orange transition-colors"
                   >
                     {item}
                   </a>
                 ))}
                 <a 
                   href="#contact"
-                  className="px-6 py-2 bg-coal text-offwhite text-xs font-black hover:bg-brand-orange transition-all"
+                  className="px-6 py-2 bg-coal text-white text-xs font-black hover:bg-deep-orange transition-all shadow-[2px_2px_0px_0px_rgba(0,167,225,1)]"
                 >
                   CONTACT
                 </a>
               </div>
 
               <button 
-                className="md:hidden p-2 bg-coal text-offwhite"
+                className="md:hidden p-2 bg-coal text-white shadow-[2px_2px_0px_0px_rgba(241,119,32,1)]"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 <Menu />
@@ -73,23 +73,23 @@ export default function App() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -100 }}
-            className="fixed inset-0 bg-brand-orange z-[70] flex flex-col items-center justify-center gap-8 p-6"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            className="fixed inset-0 bg-platinum z-[70] flex flex-col items-center justify-center gap-8 p-6"
           >
             {['Work', 'History', 'Story', 'Capabilities'].map((item) => (
               <a 
                 key={item} 
                 href={`#${item.toLowerCase()}`}
-                className="text-6xl font-display uppercase hover:text-offwhite"
+                className="text-6xl font-display uppercase hover:text-deep-orange transition-colors text-coal"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item}
               </a>
             ))}
             <X 
-              className="absolute top-8 right-6 w-12 h-12 cursor-pointer text-coal" 
+              className="absolute top-8 right-6 w-12 h-12 cursor-pointer text-deep-blue/40 hover:text-deep-orange transition-colors" 
               onClick={() => setIsMenuOpen(false)}
             />
           </motion.div>

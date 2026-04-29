@@ -26,22 +26,22 @@ export const WhatIBring = () => {
         subtitle="A rare mix of creative taste and technical execution. Focused on delivering momentum."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-coal border-2 border-coal">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Creative Column */}
-        <div className="bg-offwhite p-12 text-coal">
+        <div className="bg-white p-12 text-coal brutalist-block shadow-[4px_4px_0px_0px_rgba(241,119,32,0.3)] border-deep-orange/10">
           <h3 className="text-4xl md:text-5xl mb-12 flex items-center justify-between">
             Creative 
-            <span className="w-12 h-12 bg-brand-orange rounded-full" />
+            <span className="w-12 h-12 bg-amber/10 border border-deep-orange rounded-full" />
           </h3>
           <div className="flex flex-col gap-12">
             {CAPABILITIES.creative.map((item, i) => (
               <div key={i} className="flex gap-6 group">
-                <div className="pt-1 text-brand-orange">
+                <div className="pt-1 text-deep-orange">
                   <item.icon className="w-8 h-8" />
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-brand-orange transition-colors">{item.label}</h4>
-                  <p className="opacity-70 font-medium">{item.desc}</p>
+                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-amber transition-colors">{item.label}</h4>
+                  <p className="text-coal/60 font-medium">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -49,20 +49,20 @@ export const WhatIBring = () => {
         </div>
 
         {/* Builder Column */}
-        <div className="bg-offwhite p-12 text-coal">
+        <div className="bg-white p-12 text-coal brutalist-block border-deep-blue/10">
           <h3 className="text-4xl md:text-5xl mb-12 flex items-center justify-between">
             Builder
-            <span className="w-12 h-12 bg-brand-blue" />
+            <span className="w-12 h-12 bg-sky-blue/10 border border-deep-blue" />
           </h3>
           <div className="flex flex-col gap-12">
             {CAPABILITIES.builder.map((item, i) => (
               <div key={i} className="flex gap-6 group">
-                <div className="pt-1 text-brand-blue">
+                <div className="pt-1 text-deep-blue">
                   <item.icon className="w-8 h-8" />
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-brand-blue transition-colors">{item.label}</h4>
-                  <p className="opacity-70 font-medium">{item.desc}</p>
+                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-sky-blue transition-colors">{item.label}</h4>
+                  <p className="text-coal/60 font-medium">{item.desc}</p>
                 </div>
               </div>
             ))}
