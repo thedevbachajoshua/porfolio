@@ -6,19 +6,14 @@ import assetsData from '../assets-data.json';
 export const Hero = () => {
   const mainPic = assetsData.mainPic;
   return (
-    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[225px_1fr] lg:grid-rows-[auto_1fr_60px] gap-3 md:gap-4 overflow-hidden">
+    <section className="relative min-h-screen bg-platinum p-3 md:p-6 grid grid-cols-1 lg:grid-cols-[225px_1fr] lg:grid-rows-[1fr_auto] gap-3 md:gap-4 overflow-hidden">
       {/* Background Shapes for flair */}
       <div className="absolute top-1/4 -right-20 w-[40vw] h-[40vw] bg-deep-orange/5 rounded-full blur-[120px] -z-10" />
-
-      {/* Header Nav */}
-      <nav className="lg:col-span-2 bg-white text-coal flex items-center px-5 py-3 font-black uppercase text-sm border border-deep-blue/10">
-        <div className="tracking-tighter">thebachajoshua™</div>
-      </nav>
 
       {/* Sidebar Left */}
       <aside className="flex flex-col gap-4">
         <div className="flex-1 bg-amber/10 p-6 flex flex-col justify-center items-center relative overflow-hidden border border-deep-blue/10">
-          <div className="w-full aspect-[4/5] bg-white border border-deep-blue/20 overflow-hidden shadow-sm relative">
+          <div className="w-1/2 lg:w-full aspect-[4/5] bg-white border border-deep-blue/20 overflow-hidden shadow-sm relative">
              <img 
               src={mainPic} 
               alt="Joshua Bacha"
@@ -41,7 +36,8 @@ export const Hero = () => {
         
         <motion.div
            initial={{ opacity: 0, y: 30 }}
-           animate={{ opacity: 1, y: 0 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: false }}
            transition={{ duration: 0.8 }}
         >
           <h1 className="text-[10vw] md:text-[82px] leading-[1] md:leading-[0.95] mb-8 font-display text-coal">
@@ -73,7 +69,7 @@ export const Hero = () => {
       </main>
 
       {/* Signal Strip (Footer of Hero) */}
-      <footer className="lg:col-span-2 bg-white text-coal flex items-center overflow-hidden brutalist-block h-20 shadow-none border-t border-deep-blue/10">
+      <footer className="lg:col-span-2 bg-white text-coal flex items-center overflow-hidden brutalist-block h-20 shadow-none border border-deep-blue/10">
         <motion.div 
           animate={{ x: [0, -2000] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}

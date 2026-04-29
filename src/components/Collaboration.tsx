@@ -9,7 +9,13 @@ export const Collaboration = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-deep-orange/10 rounded-full blur-[150px]" />
       </div>
 
-      <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center gap-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="max-w-4xl mx-auto relative z-10 flex flex-col items-center gap-8"
+      >
         <h2 className="text-6xl md:text-8xl font-display leading-[0.8] mb-4">
           IF YOU’RE BUILDING <br /> <span className="text-deep-orange italic">LEGACY</span> <br /><br /> LET'S TALK
         </h2>
@@ -26,7 +32,7 @@ export const Collaboration = () => {
             Contact Me
           </MagneticButton>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

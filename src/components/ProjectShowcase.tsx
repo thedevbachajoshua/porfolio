@@ -26,19 +26,26 @@ const PROJECTS = [
 export const ProjectShowcase = () => {
   return (
     <section className="py-24 px-6 md:px-12 bg-white w-full">
-      <SectionHeader 
-        number="01" 
-        title="Selected Work" 
-        subtitle="Premium project showcase where cinematic vision meets strategic execution."
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <SectionHeader 
+          number="01" 
+          title="Selected Work" 
+          subtitle="Premium project showcase where cinematic vision meets strategic execution."
+        />
+      </motion.div>
 
       <div className="flex flex-col gap-32">
         {PROJECTS.map((project, idx) => (
           <motion.div 
             key={project.id}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.8 }}
             className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
           >

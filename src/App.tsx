@@ -23,51 +23,42 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden">
+    <div className="relative bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden pt-16 md:pt-20">
       <GrainOverlay />
       
-      {/* Sticky Navbar - only shows after scroll past Hero */}
-      <AnimatePresence>
-        {scrolled && (
-          <motion.nav 
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            exit={{ y: -100 }}
-            className="fixed top-0 left-0 w-full z-[80] bg-white/95 backdrop-blur-md py-4 text-coal border-b border-deep-blue/10 shadow-sm"
-          >
-            <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-              <div className="font-display text-2xl tracking-tighter uppercase font-black">
-                thebachajoshua™
-              </div>
+      {/* Sticky Persistent Navbar */}
+      <nav className="fixed top-0 left-0 w-full z-[80] bg-white/95 backdrop-blur-md py-4 text-coal border-b border-deep-blue/10 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+          <div className="font-display text-xl md:text-2xl tracking-tighter uppercase font-black">
+            thebachajoshua™
+          </div>
 
-              <div className="hidden md:flex items-center gap-12 font-display uppercase tracking-widest text-xs font-black">
-                {['Work', 'History', 'Story', 'Capabilities'].map((item) => (
-                  <a 
-                    key={item} 
-                    href={`#${item.toLowerCase()}`}
-                    className="hover:text-deep-orange transition-colors"
-                  >
-                    {item}
-                  </a>
-                ))}
-                <a 
-                  href="#contact"
-                  className="px-6 py-2 bg-coal text-white text-xs font-black hover:bg-deep-orange transition-all shadow-[1.5px_1.5px_0px_0px_rgba(0,167,225,1)]"
-                >
-                  CONTACT
-                </a>
-              </div>
-
-              <button 
-                className="md:hidden p-2 bg-coal text-white shadow-[2px_2px_0px_0px_rgba(241,119,32,1)]"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+          <div className="hidden md:flex items-center gap-12 font-display uppercase tracking-widest text-xs font-black">
+            {['Work', 'History', 'Story', 'Capabilities'].map((item) => (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase()}`}
+                className="hover:text-deep-orange transition-colors"
               >
-                <Menu />
-              </button>
-            </div>
-          </motion.nav>
-        )}
-      </AnimatePresence>
+                {item}
+              </a>
+            ))}
+            <a 
+              href="#contact"
+              className="px-6 py-2 bg-coal text-white text-xs font-black hover:bg-deep-orange transition-all shadow-[1.5px_1.5px_0px_0px_rgba(0,167,225,1)]"
+            >
+              CONTACT
+            </a>
+          </div>
+
+          <button 
+            className="md:hidden p-2 bg-deep-orange text-white shadow-[2px_2px_0px_0px_rgba(0,167,225,1)]"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -110,7 +101,7 @@ export default function App() {
                 ))}
                 <a 
                   href="#contact"
-                  className="mt-8 px-8 py-4 bg-deep-orange text-white text-sm font-black text-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] uppercase"
+                  className="mt-8 px-8 py-4 bg-deep-orange text-white text-sm font-black text-center shadow-[3px_3px_0px_0px_rgba(0,167,225,1)] uppercase"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contact Me
@@ -127,7 +118,6 @@ export default function App() {
 
       <main>
         <Hero />
-        <ProofStrip />
         <div id="work">
           <ProjectShowcase />
         </div>

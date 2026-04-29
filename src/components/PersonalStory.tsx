@@ -13,7 +13,13 @@ export const PersonalStory = () => {
         AMBITION
       </motion.div>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-100px" }}
+        transition={{ duration: 1 }}
+        className="max-w-5xl mx-auto relative z-10"
+      >
         <SectionHeader 
           number="03" 
           title="Personal Story" 
@@ -70,7 +76,7 @@ export const PersonalStory = () => {
           <span>Joshua Bacha</span>
           <span>Accra // 2026</span>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

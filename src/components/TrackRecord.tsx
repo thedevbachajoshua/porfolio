@@ -38,7 +38,13 @@ const TrackSection = ({ title, items, colorClass }: { title: string, items: { ti
 export const TrackRecord = () => {
   return (
     <section className="py-24 px-6 md:px-12 bg-platinum text-coal">
-      <div className="max-w-7xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto"
+      >
         <SectionHeader 
           number="02" 
           title="Track Record" 
@@ -49,7 +55,7 @@ export const TrackRecord = () => {
           <TrackSection title="Awards" items={TRACK_RECORDS.awards} colorClass="text-deep-orange" />
           <TrackSection title="Roles" items={TRACK_RECORDS.roles} colorClass="text-deep-blue" />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

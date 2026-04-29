@@ -20,15 +20,28 @@ const CAPABILITIES = {
 export const WhatIBring = () => {
   return (
     <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-      <SectionHeader 
-        number="04" 
-        title="What I Bring" 
-        subtitle="A rare mix of creative taste and technical execution. Focused on delivering momentum."
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <SectionHeader 
+          number="04" 
+          title="What I Bring" 
+          subtitle="A rare mix of creative taste and technical execution. Focused on delivering momentum."
+        />
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-32">
         {/* Creative Column */}
-        <div className="bg-white p-12 text-coal brutalist-block shadow-[3px_3px_0px_0px_rgba(241,119,32,0.3)] border-deep-orange/10">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="bg-white p-12 text-coal brutalist-block shadow-[3px_3px_0px_0px_rgba(241,119,32,0.3)] border-deep-orange/10"
+        >
           <h3 className="text-4xl md:text-5xl mb-12 flex items-center justify-between">
             Creative 
             <span className="w-12 h-12 bg-amber/10 border border-deep-orange rounded-full" />
@@ -46,10 +59,16 @@ export const WhatIBring = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Builder Column */}
-        <div className="bg-white p-12 text-coal brutalist-block border-deep-blue/10">
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="bg-white p-12 text-coal brutalist-block border-deep-blue/10"
+        >
           <h3 className="text-4xl md:text-5xl mb-12 flex items-center justify-between">
             Builder
             <span className="w-12 h-12 bg-sky-blue/10 border border-deep-blue" />
@@ -67,7 +86,7 @@ export const WhatIBring = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
