@@ -20,7 +20,8 @@ const PROJECTS = [
     image: "https://images.unsplash.com/photo-1542204111-970c97b0a79a?q=80&w=2835",
     tags: ["Storytelling", "Editing", "Knowledge Sharing"],
     color: "bg-sky-blue",
-    link: "https://www.youtube.com/@thebachajoshua"
+    link: "https://www.youtube.com/@thebachajoshua",
+    embed: "https://www.youtube.com/embed/o6mOGJRhqLI"
   }
 ];
 
@@ -41,7 +42,7 @@ export const ProjectShowcase = () => {
       </motion.div>
 
       <div className="flex flex-col gap-32">
-        {PROJECTS.map((project, idx) => (
+        {PROJECTS.map((project: any, idx) => (
           <motion.div 
             key={project.id}
             initial={{ opacity: 0, y: 60 }}
@@ -52,18 +53,30 @@ export const ProjectShowcase = () => {
           >
             <div className={`lg:col-span-7 relative group ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
               <motion.div 
-                whileHover={{ scale: 0.98, x: -2, y: -2 }}
-                className="relative aspect-video overflow-hidden border border-deep-blue/10 cursor-pointer bg-muted shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-all"
+                whileHover={!project.embed ? { scale: 0.98, x: -2, y: -2 } : undefined}
+                className="relative aspect-video overflow-hidden border border-deep-blue/10 bg-muted shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-all"
               >
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                />
-                <div className="absolute inset-0 bg-coal/5 group-hover:bg-transparent transition-colors" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-deep-orange text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity scale-0 group-hover:scale-100 duration-500 shadow-xl">
-                  <Play className="w-8 h-8 fill-current" />
-                </div>
+                {project.embed ? (
+                  <iframe 
+                    src={project.embed}
+                    title={project.title}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <>
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 bg-coal/5 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-deep-orange text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity scale-0 group-hover:scale-100 duration-500 shadow-xl">
+                      <Play className="w-8 h-8 fill-current" />
+                    </div>
+                  </>
+                )}
               </motion.div>
               {/* Decorative square */}
               <div className={`absolute -bottom-4 -right-4 w-16 h-16 ${project.color} opacity-10 -z-10`} />
@@ -78,14 +91,14 @@ export const ProjectShowcase = () => {
                 {project.desc}
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
-                {project.tags.map(tag => (
+                {project.tags.map((tag: any) => (
                   <span key={tag} className="px-3 py-1 bg-deep-blue/5 text-[10px] font-black uppercase border border-deep-blue/10 text-deep-blue/80">{tag}</span>
                 ))}
               </div>
               <a 
-                href={(project as any).link || "#"} 
-                target={(project as any).link ? "_blank" : undefined}
-                rel={(project as any).link ? "noopener noreferrer" : undefined}
+                href={project.link || "#"} 
+                target={project.link ? "_blank" : undefined}
+                rel={project.link ? "noopener noreferrer" : undefined}
                 className="flex items-center gap-3 text-xl font-display uppercase group mt-6 w-fit bg-coal text-white px-8 py-3 hover:bg-deep-orange transition-colors shadow-[4px_4px_0px_0px_rgba(4,116,186,1)]"
               >
                 Explore 
