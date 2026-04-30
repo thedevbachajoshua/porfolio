@@ -19,7 +19,8 @@ const PROJECTS = [
     desc: "Cinematic documentation of innovation and ambition. Exploring Africa's future through the lens of technology and human potential.",
     image: "https://images.unsplash.com/photo-1542204111-970c97b0a79a?q=80&w=2835",
     tags: ["Storytelling", "Editing", "Knowledge Sharing"],
-    color: "bg-sky-blue"
+    color: "bg-sky-blue",
+    link: "https://www.youtube.com/@thebachajoshua"
   }
 ];
 
@@ -81,10 +82,15 @@ export const ProjectShowcase = () => {
                   <span key={tag} className="px-3 py-1 bg-deep-blue/5 text-[10px] font-black uppercase border border-deep-blue/10 text-deep-blue/80">{tag}</span>
                 ))}
               </div>
-              <button className="flex items-center gap-3 text-xl font-display uppercase group mt-6 w-fit bg-coal text-white px-8 py-3 hover:bg-deep-orange transition-colors shadow-[4px_4px_0px_0px_rgba(4,116,186,1)]">
+              <a 
+                href={(project as any).link || "#"} 
+                target={(project as any).link ? "_blank" : undefined}
+                rel={(project as any).link ? "noopener noreferrer" : undefined}
+                className="flex items-center gap-3 text-xl font-display uppercase group mt-6 w-fit bg-coal text-white px-8 py-3 hover:bg-deep-orange transition-colors shadow-[4px_4px_0px_0px_rgba(4,116,186,1)]"
+              >
                 Explore 
                 <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
             </div>
           </motion.div>
         ))}

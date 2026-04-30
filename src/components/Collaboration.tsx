@@ -60,13 +60,13 @@ export const Footer = () => {
             mbabachajoshua@gmail.com
           </a>
           <div className="flex gap-4">
-            <a href="https://www.instagram.com/thebachajoshua/" target="_blank" className="p-3 bg-white border border-deep-blue/10 text-coal hover:bg-deep-orange hover:text-white transition-all shadow-sm">
+            <a href="https://www.instagram.com/thebachajoshua/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white border border-deep-blue/10 text-coal hover:bg-deep-orange hover:text-white transition-all shadow-sm">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="https://www.linkedin.com/in/thebachajoshua/" target="_blank" className="p-3 bg-white border border-deep-blue/10 text-coal hover:bg-deep-blue hover:text-white transition-all shadow-sm">
+            <a href="https://www.linkedin.com/in/thebachajoshua/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white border border-deep-blue/10 text-coal hover:bg-deep-blue hover:text-white transition-all shadow-sm">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://www.youtube.com/@thebachajoshua" target="_blank" className="p-3 bg-white border border-deep-blue/10 text-coal hover:bg-red-500 hover:text-white transition-all shadow-sm">
+            <a href="https://www.youtube.com/@thebachajoshua" target="_blank" rel="noopener noreferrer" className="p-3 bg-white border border-deep-blue/10 text-coal hover:bg-red-500 hover:text-white transition-all shadow-sm">
               <Youtube className="w-5 h-5" />
             </a>
           </div>

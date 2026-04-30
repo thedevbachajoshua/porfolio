@@ -69,13 +69,13 @@ export const Hero = () => {
           <span className="absolute bottom-6 right-8 text-sm md:text-base font-black opacity-20 whitespace-nowrap tracking-tighter select-none">EST. 2008</span>
 
           <div className="flex gap-4 mt-8">
-            <a href="https://www.instagram.com/thebachajoshua/" className="w-12 h-12 border border-deep-blue/20 flex items-center justify-center hover:bg-deep-orange hover:text-white transition-all shadow-sm">
+            <a href="https://www.instagram.com/thebachajoshua/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-deep-blue/20 flex items-center justify-center hover:bg-deep-orange hover:text-white transition-all shadow-sm">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="https://www.linkedin.com/in/thebachajoshua/" className="w-12 h-12 border border-deep-blue/20 flex items-center justify-center hover:bg-deep-blue hover:text-white transition-all shadow-sm">
+            <a href="https://www.linkedin.com/in/thebachajoshua/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-deep-blue/20 flex items-center justify-center hover:bg-deep-blue hover:text-white transition-all shadow-sm">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://www.youtube.com/@thebachajoshua" className="w-12 h-12 border border-deep-blue/20 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all text-coal shadow-sm">
+            <a href="https://www.youtube.com/@thebachajoshua" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-deep-blue/20 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all text-coal shadow-sm">
               <Youtube className="w-5 h-5" />
             </a>
           </div>
