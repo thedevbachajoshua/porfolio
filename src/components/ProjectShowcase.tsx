@@ -1,6 +1,34 @@
-import { motion } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 import { SectionHeader } from './Shared';
 import { Play, ExternalLink } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
+
+const VideoPlayer = ({ src, title }: { src: string, title: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, { amount: 0.5 });
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isInView) {
+        videoRef.current.play().catch(e => console.error("Video play error:", e));
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isInView]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover transition-all duration-700"
+      title={title}
+    />
+  );
+};
 
 const PROJECTS = [
   {
@@ -8,7 +36,7 @@ const PROJECTS = [
     title: "Nova Genesis Studio",
     category: "Media Production",
     desc: "A creative vehicle for high-impact visual storytelling. We craft cinematic narratives for ambitious African brands seeking to redefine their market presence.",
-    image: "https://images.unsplash.com/photo-1492691523319-a74b455cddea?q=80&w=2940",
+    video: "/novagen.mp4",
     tags: ["Brand Visuals", "Cinematography", "Creative Direction"],
     color: "bg-deep-orange"
   },
@@ -64,14 +92,16 @@ export const ProjectShowcase = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
+                ) : project.video ? (
+                  <VideoPlayer src={project.video} title={project.title} />
                 ) : (
                   <>
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-coal/5 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute inset-0 bg-transparent transition-colors" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-deep-orange text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity scale-0 group-hover:scale-100 duration-500 shadow-xl">
                       <Play className="w-8 h-8 fill-current" />
                     </div>
