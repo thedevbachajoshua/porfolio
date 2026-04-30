@@ -1,7 +1,8 @@
-import { motion, useInView } from 'motion/react';
+import { motion } from 'motion/react';
 import { SectionHeader } from './Shared';
 import { Play, ExternalLink } from 'lucide-react';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
+import heroVideo from '../assets/hero-bg.mp4';
 
 const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poster?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -19,9 +20,6 @@ const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poste
         title={title}
         key={src}
         poster={poster}
-        onError={(e) => {
-          console.error("Video loading error. This is likely blocked by an ad-blocker (ERR_BLOCKED_BY_CLIENT).", e);
-        }}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
@@ -36,7 +34,7 @@ const PROJECTS = [
     title: "Nova Genesis Studio",
     category: "Media Production",
     desc: "A creative vehicle for high-impact visual storytelling. We craft cinematic narratives for ambitious African brands seeking to redefine their market presence.",
-    video: "/video-bg.mp4",
+    video: heroVideo,
     image: "https://images.unsplash.com/photo-1492691523319-a74b455cddea?q=80&w=2940",
     tags: ["Brand Visuals", "Cinematography", "Creative Direction"],
     color: "bg-deep-orange"
