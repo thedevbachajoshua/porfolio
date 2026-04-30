@@ -4,22 +4,29 @@ import { Play, ExternalLink } from 'lucide-react';
 import React, { useRef, useEffect } from 'react';
 
 const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poster?: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
-    <video
-      muted
-      loop
-      playsInline
-      autoPlay
-      preload="auto"
-      className="w-full h-full object-cover transition-all duration-700 bg-coal"
-      title={title}
-      key={src}
-      poster={poster}
-    >
-      <source src={src.startsWith('/') ? src : `/${src}`} type="video/mp4" />
-      <source src={src.startsWith('/') ? src.replace('.mp4', '.webm') : `/${src.replace('.mp4', '.webm')}`} type="video/webm" />
-      Your browser does not support the video tag.
-    </video>
+    <div className="relative w-full h-full bg-coal">
+      <video
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="auto"
+        className="w-full h-full object-cover transition-all duration-700"
+        title={title}
+        key={src}
+        poster={poster}
+        onError={(e) => {
+          console.error("Video loading error. This is likely blocked by an ad-blocker (ERR_BLOCKED_BY_CLIENT).", e);
+        }}
+      >
+        <source src={src} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
   );
 };
 
@@ -29,7 +36,7 @@ const PROJECTS = [
     title: "Nova Genesis Studio",
     category: "Media Production",
     desc: "A creative vehicle for high-impact visual storytelling. We craft cinematic narratives for ambitious African brands seeking to redefine their market presence.",
-    video: "/novagen.mp4",
+    video: "/video-bg.mp4",
     image: "https://images.unsplash.com/photo-1492691523319-a74b455cddea?q=80&w=2940",
     tags: ["Brand Visuals", "Cinematography", "Creative Direction"],
     color: "bg-deep-orange"
