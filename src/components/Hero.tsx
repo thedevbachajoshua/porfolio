@@ -26,7 +26,7 @@ export const Hero = () => {
         
         <div className="brutalist-block p-6 bg-white">
           <p className="text-lg italic font-semibold leading-relaxed text-coal/70">
-            "Relentlessly resourceful problem-solver and collaborator dedicated to finding a way around constraints"
+            "High agency collaborative problem-solver"
           </p>
         </div>
       </aside>
