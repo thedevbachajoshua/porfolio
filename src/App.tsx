@@ -45,7 +45,7 @@ export default function App() {
             ))}
             <a 
               href="#contact"
-              className="px-6 py-2 bg-deep-orange text-white text-xs font-black hover:brightness-110 transition-all shadow-[1.5px_1.5px_0px_0px_rgba(0,167,225,1)]"
+              className="px-6 py-2 bg-coal text-white text-xs font-black hover:bg-deep-orange transition-all shadow-[1.5px_1.5px_0px_0px_rgba(0,167,225,1)]"
             >
               CONTACT
             </a>
