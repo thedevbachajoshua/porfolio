@@ -16,8 +16,8 @@ const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poste
       key={src}
       poster={poster}
     >
-      <source src={src} type="video/mp4" />
-      <source src={src.replace('.mp4', '.webm')} type="video/webm" />
+      <source src={src.startsWith('/') ? src : `/${src}`} type="video/mp4" />
+      <source src={src.startsWith('/') ? src.replace('.mp4', '.webm') : `/${src.replace('.mp4', '.webm')}`} type="video/webm" />
       Your browser does not support the video tag.
     </video>
   );
@@ -29,7 +29,7 @@ const PROJECTS = [
     title: "Nova Genesis Studio",
     category: "Media Production",
     desc: "A creative vehicle for high-impact visual storytelling. We craft cinematic narratives for ambitious African brands seeking to redefine their market presence.",
-    video: "novagen.mp4",
+    video: "/novagen.mp4",
     image: "https://images.unsplash.com/photo-1492691523319-a74b455cddea?q=80&w=2940",
     tags: ["Brand Visuals", "Cinematography", "Creative Direction"],
     color: "bg-deep-orange"
