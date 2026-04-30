@@ -25,7 +25,7 @@ export const Hero = () => {
         </div>
         
         <div className="brutalist-block p-6 bg-white">
-          <p className="text-lg italic leading-relaxed text-coal/70">
+          <p className="text-lg italic font-semibold leading-relaxed text-coal/70">
             "Relentlessly resourceful problem-solver and collaborator dedicated to finding a way around constraints"
           </p>
         </div>
@@ -40,14 +40,14 @@ export const Hero = () => {
            viewport={{ once: false }}
            transition={{ duration: 0.8 }}
         >
-          <h1 className="text-[10vw] md:text-[82px] leading-[1] md:leading-[0.95] mb-8 font-display text-coal">
+          <h1 className="text-[10vw] md:text-[82px] leading-[1] md:leading-[0.95] mb-8 font-display font-black text-coal">
             Your Favourite<br />
             <span className="text-sky-blue">18 y/o</span><br />
             <span className="bg-deep-orange text-white px-2 md:px-4 leading-normal inline-block mt-2">FAILING IN PUBLIC</span>
           </h1>
           
           <div className="max-w-md">
-            <p className="text-base md:text-lg text-coal/60 leading-relaxed font-medium">
+            <p className="text-base md:text-lg text-coal/70 leading-relaxed font-bold">
               A live record of ambition, mistakes, and everything in between.
             </p>
           </div>
@@ -73,7 +73,7 @@ export const Hero = () => {
         <motion.div 
           animate={{ x: [0, -2000] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="flex whitespace-nowrap text-5xl md:text-[32px] font-display opacity-80 px-5"
+          className="flex whitespace-nowrap text-5xl md:text-[32px] font-display font-black opacity-80 px-5"
         >
           {[...Array(20)].map((_, i) => (
             <span key={i} className="mr-20">FOUNDER. BUILDER. STORYTELLER. PROUD AFRICAN.</span>

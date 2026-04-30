@@ -16,7 +16,7 @@ export const Collaboration = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto relative z-10 flex flex-col items-center gap-8"
       >
-        <h2 className="text-6xl md:text-8xl font-display leading-[0.8] mb-4">
+        <h2 className="text-6xl md:text-8xl font-display font-black leading-[0.8] mb-4">
           IF YOU’RE BUILDING <br /> <span className="text-deep-orange italic">LEGACY</span> <br /><br /> LET'S TALK
         </h2>
         
@@ -44,7 +44,7 @@ export const Footer = () => {
     <footer id="site-footer" className="py-24 px-6 md:px-12 bg-paper text-coal border-t border-deep-blue/10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-8 flex flex-col gap-6">
-          <h2 className="text-5xl md:text-7xl font-display tracking-tighter text-deep-orange">JOSHUA BACHA</h2>
+          <h2 className="text-5xl md:text-7xl font-display font-black tracking-tighter text-deep-orange">JOSHUA BACHA</h2>
           <div className="flex items-center gap-2 text-sm font-bold opacity-60">
             <MapPin className="w-4 h-4" />
             <span>ACCRA, GHANA</span>

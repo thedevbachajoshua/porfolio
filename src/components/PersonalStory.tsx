@@ -6,9 +6,9 @@ export const PersonalStory = () => {
     <section className="py-24 px-6 md:px-12 bg-white text-coal overflow-hidden relative border-y border-deep-blue/5">
       <motion.div 
         initial={{ scale: 2, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 0.02 }}
+        whileInView={{ scale: 1, opacity: 0.1 }}
         transition={{ duration: 1.5 }}
-        className="absolute inset-0 flex items-center justify-center font-display text-[30vw] select-none pointer-events-none text-deep-orange"
+        className="absolute inset-0 flex items-center justify-center font-display font-black text-[30vw] select-none pointer-events-none text-deep-orange"
       >
         AMBITION
       </motion.div>
@@ -29,10 +29,10 @@ export const PersonalStory = () => {
         />
         
         <h2 className="flex flex-col gap-2 mb-12">
-          <span className="text-2xl md:text-4xl font-display leading-[0.9] text-deep-blue uppercase tracking-tighter">
+          <span className="text-2xl md:text-4xl font-display font-black leading-[0.9] text-deep-blue uppercase tracking-tighter">
             Documenting the process,
           </span>
-          <span className="text-xl md:text-3xl font-display leading-[0.9] text-deep-blue/40 uppercase tracking-tighter md:translate-x-12">
+          <span className="text-xl md:text-3xl font-display font-black leading-[0.9] text-deep-blue/40 uppercase tracking-tighter md:translate-x-12">
             not just the outcome.
           </span>
         </h2>
@@ -51,7 +51,7 @@ export const PersonalStory = () => {
             
             <div className="relative">
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-deep-blue/40 block mb-6">Execution Mindset</span>
-              <h3 className="text-4xl md:text-6xl font-display uppercase text-coal leading-[0.85] mb-8">The<br />Foundation</h3>
+              <h3 className="text-4xl md:text-6xl font-display font-black uppercase text-coal leading-[0.85] mb-8">The<br />Foundation</h3>
             </div>
             
             <div className="flex flex-col gap-8 border-l-2 border-deep-orange/20 pl-8">

@@ -53,8 +53,8 @@ export const WhatIBring = () => {
                   <item.icon className="w-8 h-8" />
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-amber transition-colors">{item.label}</h4>
-                  <p className="text-coal/60 font-medium">{item.desc}</p>
+                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-amber transition-colors font-black">{item.label}</h4>
+                  <p className="text-coal/70 font-semibold">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -80,8 +80,8 @@ export const WhatIBring = () => {
                   <item.icon className="w-8 h-8" />
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-sky-blue transition-colors">{item.label}</h4>
-                  <p className="text-coal/60 font-medium">{item.desc}</p>
+                  <h4 className="text-xl font-display uppercase tracking-tight group-hover:text-sky-blue transition-colors font-black">{item.label}</h4>
+                  <p className="text-coal/70 font-semibold">{item.desc}</p>
                 </div>
               </div>
             ))}

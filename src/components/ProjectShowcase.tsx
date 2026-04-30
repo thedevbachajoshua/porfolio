@@ -71,9 +71,9 @@ export const ProjectShowcase = () => {
             <div className={`lg:col-span-5 flex flex-col gap-6 ${idx % 2 !== 0 ? 'lg:order-1' : ''}`}>
               <div className="flex flex-col gap-2">
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-sky-blue">{project.category}</span>
-                <h3 className="text-5xl md:text-7xl leading-[1] md:leading-[0.9] text-coal">{project.title}</h3>
+                <h3 className="text-5xl md:text-7xl leading-[1] md:leading-[0.9] text-coal font-black">{project.title}</h3>
               </div>
-              <p className="text-lg text-coal/70 leading-relaxed font-medium">
+              <p className="text-lg text-coal/80 leading-relaxed font-bold">
                 {project.desc}
               </p>
               <div className="flex flex-wrap gap-2 mt-4">

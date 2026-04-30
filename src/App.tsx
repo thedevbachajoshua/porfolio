@@ -92,7 +92,7 @@ export default function App() {
                   <motion.a 
                     key={item} 
                     href={`#${item.toLowerCase()}`}
-                    className="text-3xl font-display uppercase hover:text-deep-orange transition-colors text-coal border-b border-coal/5 pb-2"
+                    className="text-3xl font-display font-black uppercase hover:text-deep-orange transition-colors text-coal border-b border-coal/5 pb-2"
                     onClick={() => setIsMenuOpen(false)}
                     whileHover={{ x: 10 }}
                   >

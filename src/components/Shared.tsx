@@ -14,12 +14,12 @@ export const SectionHeader = ({ number, title, subtitle, className = "", numberC
   return (
     <div className={`mb-12 md:mb-24 flex flex-col gap-2 ${className}`}>
       <div className="flex items-center gap-4">
-        <span className={`font-display text-2xl md:text-4xl leading-none ${numberColor}`}>{number}</span>
+        <span className={`font-display text-2xl md:text-4xl leading-none font-black ${numberColor}`}>{number}</span>
         <div className="h-px flex-1 bg-deep-blue/10" />
       </div>
-      <h2 className="text-5xl md:text-9xl font-display leading-[0.8] text-coal">{title}</h2>
+      <h2 className="text-5xl md:text-9xl font-display leading-[0.8] text-coal font-black">{title}</h2>
       {subtitle && (
-        <p className="max-w-md text-sm md:text-base text-coal/60 mt-4 font-medium uppercase tracking-widest border-l-2 border-deep-blue/30 pl-4">
+        <p className="max-w-md text-sm md:text-base text-coal/60 mt-4 font-bold uppercase tracking-widest border-l-2 border-deep-blue/30 pl-4 italic">
           {subtitle}
         </p>
       )}
