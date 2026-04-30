@@ -1,11 +1,30 @@
 import { motion } from 'motion/react';
 import { SectionHeader } from './Shared';
 import { Play, ExternalLink } from 'lucide-react';
-import React, { useRef } from 'react';
-import heroVideo from '../assets/hero-bg.mp4';
+import React, { useRef, useEffect, useState } from 'react';
 
 const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poster?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    // Manually trigger play because sometimes autoPlay attribute is ignored
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.warn("Autoplay was prevented:", err);
+      });
+    }
+  }, [src]);
+
+  if (hasError) {
+    return (
+      <img 
+        src={poster} 
+        alt={title}
+        className="w-full h-full object-cover"
+      />
+    );
+  }
 
   return (
     <div className="relative w-full h-full bg-coal">
@@ -20,6 +39,7 @@ const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poste
         title={title}
         key={src}
         poster={poster}
+        onError={() => setHasError(true)}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
@@ -34,7 +54,7 @@ const PROJECTS = [
     title: "Nova Genesis Studio",
     category: "Media Production",
     desc: "A creative vehicle for high-impact visual storytelling. We craft cinematic narratives for ambitious African brands seeking to redefine their market presence.",
-    video: heroVideo,
+    video: "https://player.vimeo.com/external/370331493.sd.mp4?s=7b2358fb441c79e602717833a6b571d092d6e355&profile_id=139&oauth2_token_id=57447761",
     image: "https://images.unsplash.com/photo-1492691523319-a74b455cddea?q=80&w=2940",
     tags: ["Brand Visuals", "Cinematography", "Creative Direction"],
     color: "bg-deep-orange"
