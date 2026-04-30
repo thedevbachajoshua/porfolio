@@ -4,29 +4,19 @@ import { Play, ExternalLink } from 'lucide-react';
 import React, { useRef, useEffect } from 'react';
 
 const VideoPlayer = ({ src, title }: { src: string, title: string }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const isInView = useInView(videoRef, { amount: 0.5 });
-
-  useEffect(() => {
-    if (videoRef.current) {
-      if (isInView) {
-        videoRef.current.play().catch(e => console.error("Video play error:", e));
-      } else {
-        videoRef.current.pause();
-      }
-    }
-  }, [isInView]);
-
   return (
     <video
-      ref={videoRef}
-      src={src}
       muted
       loop
       playsInline
+      autoPlay
+      preload="auto"
       className="w-full h-full object-cover transition-all duration-700"
       title={title}
-    />
+    >
+      <source src={src} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
   );
 };
 
