@@ -1,9 +1,9 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap');
 
 @theme {
-  --font-display: "Arial Black", "Impact", "Anton", sans-serif;
-  --font-sans: "Helvetica Neue", Arial, "Inter", sans-serif;
+  --font-display: "Anton", "Arial Black", "Impact", sans-serif;
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   
   --color-deep-orange: #F17720;
   --color-amber: #FFA630;
