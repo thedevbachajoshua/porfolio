@@ -21,7 +21,21 @@ export const Hero = () => {
               referrerPolicy="no-referrer"
             />
           </div>
-          <h2 className="text-4xl text-coal leading-[0.9] mt-8 self-start relative z-10 font-black">JOSHUA<br />BACHA</h2>
+          <div className="flex flex-col items-center gap-2 mt-8 relative z-10 w-full">
+            <span className="text-3xl lg:text-2xl text-coal leading-tight font-technical lowercase font-black text-center px-2">hey there</span>
+            <motion.span
+              animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                repeatDelay: 1,
+                ease: "easeInOut"
+              }}
+              className="text-3xl inline-block"
+            >
+              👋
+            </motion.span>
+          </div>
         </div>
         
         <div className="brutalist-block p-6 bg-white">
