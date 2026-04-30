@@ -28,10 +28,17 @@ export default function App() {
       
       {/* Sticky Persistent Navbar */}
       <nav className="fixed top-0 left-0 w-full z-[80] bg-white/95 backdrop-blur-md py-4 text-coal border-b border-deep-blue/10 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          <div className="font-display text-xl md:text-2xl tracking-tighter uppercase font-black">
+        <div className="w-full px-6 flex justify-between items-center">
+          <a 
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="font-display text-xl md:text-2xl tracking-tighter uppercase font-black cursor-pointer hover:text-deep-orange transition-colors"
+          >
             thebachajoshua™
-          </div>
+          </a>
 
           <div className="hidden md:flex items-center gap-12 font-display uppercase tracking-widest text-xs font-black">
             {['Work', 'History', 'Story', 'Capabilities'].map((item) => (
@@ -45,7 +52,7 @@ export default function App() {
             ))}
             <a 
               href="#contact"
-              className="px-6 py-2 bg-coal text-white text-xs font-black hover:bg-deep-orange transition-all shadow-[1.5px_1.5px_0px_0px_rgba(0,167,225,1)]"
+              className="px-6 py-2 bg-deep-orange text-white text-xs font-black hover:bg-coal transition-all shadow-[1.5px_1.5px_0px_0px_rgba(0,167,225,1)]"
             >
               CONTACT
             </a>
