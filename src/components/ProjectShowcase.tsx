@@ -42,8 +42,7 @@ const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poste
         loop
         playsInline
         preload="auto"
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        title={title}
+        className="w-full h-full object-cover"
         key={resolvedSrc}
         poster={poster}
         onError={() => setHasError(true)}
@@ -106,7 +105,7 @@ export const ProjectShowcase = () => {
           >
             <div className={`lg:col-span-7 relative group ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
               <motion.div 
-                whileHover={!project.embed ? { scale: 0.995 } : undefined}
+                whileHover={(!project.embed && project.id !== 'nova-genesis') ? { scale: 0.995 } : undefined}
                 className="relative aspect-video overflow-hidden border border-deep-blue/10 bg-amber/5 shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-transform duration-500 ease-out"
               >
                 {project.embed ? (
