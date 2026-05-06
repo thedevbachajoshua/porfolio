@@ -28,19 +28,10 @@ export const PersonalStory = () => {
           numberColor="text-deep-orange"
         />
         
-        <h2 className="flex flex-col gap-2 mb-12">
-          <span className="text-2xl md:text-4xl font-display font-black leading-[0.9] text-deep-blue uppercase tracking-tighter">
-            Documenting the process,
-          </span>
-          <span className="text-xl md:text-3xl font-display font-black leading-[0.9] text-deep-blue/40 uppercase tracking-tighter md:translate-x-12">
-            not just the outcome.
-          </span>
-        </h2>
-        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-12">
           <div className="lg:col-span-5 flex flex-col gap-8 text-2xl md:text-4xl font-black leading-[0.9] tracking-tighter uppercase italic py-4">
             <p className="text-coal">
-              Young builder from Ghana. Driven by ambition, cinema, culture, and creation.
+              Young builder from Ghana. Driven by ambition, culture, and storytelling.
             </p>
             <p className="text-deep-orange/60">
               Failure is part of the system. I'm building in public to show everything in between.
@@ -50,7 +41,6 @@ export const PersonalStory = () => {
           <div className="lg:col-span-7 flex flex-col gap-10 p-8 md:p-16 brutalist-block bg-[#FDFCFB] shadow-[4px_4px_0px_0px_rgba(241,119,32,0.15)] border-amber/10 relative group">
             
             <div className="relative">
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-deep-blue/40 block mb-6">Execution Mindset</span>
               <h3 className="text-4xl md:text-6xl font-display font-black uppercase text-coal leading-[0.85] mb-8">The<br />Foundation</h3>
             </div>
             
@@ -72,9 +62,8 @@ export const PersonalStory = () => {
           className="h-px bg-deep-blue/10 mt-16 md:mt-20" 
         />
         
-        <div className="flex justify-between mt-8 font-display uppercase tracking-widest text-sm">
-          <span>Joshua Bacha</span>
-          <span>Accra // 2026</span>
+        <div className="flex justify-between mt-8 font-display uppercase tracking-widest text-[10px] text-coal/40">
+          <span>Documenting the process, not just the outcome.</span>
         </div>
       </motion.div>
     </section>

@@ -29,7 +29,7 @@ export const WhatIBring = () => {
         <SectionHeader 
           number="04" 
           title="What I Bring" 
-          subtitle="A rare mix of creative taste and technical execution. Focused on delivering momentum."
+          subtitle="A rare mix of creative taste and technical execution."
         />
       </motion.div>
 

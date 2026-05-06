@@ -42,7 +42,7 @@ const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poste
         loop
         playsInline
         preload="auto"
-        className="w-full h-full object-cover transition-all duration-700"
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         title={title}
         key={resolvedSrc}
         poster={poster}
@@ -90,8 +90,7 @@ export const ProjectShowcase = () => {
       >
         <SectionHeader 
           number="01" 
-          title="Selected Work" 
-          subtitle="Premium project showcase where cinematic vision meets strategic execution."
+          title="Featured Work" 
         />
       </motion.div>
 
@@ -107,8 +106,8 @@ export const ProjectShowcase = () => {
           >
             <div className={`lg:col-span-7 relative group ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
               <motion.div 
-                whileHover={!project.embed ? { scale: 0.98, x: -2, y: -2 } : undefined}
-                className="relative aspect-video overflow-hidden border border-deep-blue/10 bg-muted shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-all"
+                whileHover={!project.embed ? { scale: 0.995 } : undefined}
+                className="relative aspect-video overflow-hidden border border-deep-blue/10 bg-muted shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-transform duration-500 ease-out"
               >
                 {project.embed ? (
                   <iframe 
@@ -119,19 +118,21 @@ export const ProjectShowcase = () => {
                     allowFullScreen
                   />
                 ) : project.video ? (
-                  <VideoPlayer src={project.video} title={project.title} poster={project.image} />
+                  <div className="w-full h-full overflow-hidden">
+                    <VideoPlayer src={project.video} title={project.title} poster={project.image} />
+                  </div>
                 ) : (
-                  <>
+                  <div className="w-full h-full overflow-hidden">
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-transparent transition-colors" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-deep-orange text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity scale-0 group-hover:scale-100 duration-500 shadow-xl">
                       <Play className="w-8 h-8 fill-current" />
                     </div>
-                  </>
+                  </div>
                 )}
               </motion.div>
               {/* Decorative square */}
@@ -146,11 +147,6 @@ export const ProjectShowcase = () => {
               <p className="text-lg text-coal/80 leading-relaxed font-bold">
                 {project.desc}
               </p>
-              <div className="flex flex-wrap gap-2 mt-4">
-                {project.tags.map((tag: any) => (
-                  <span key={tag} className="px-3 py-1 bg-deep-blue/5 text-[10px] font-black uppercase border border-deep-blue/10 text-deep-blue/80">{tag}</span>
-                ))}
-              </div>
               <a 
                 href={project.link || "#"} 
                 target={project.link ? "_blank" : undefined}

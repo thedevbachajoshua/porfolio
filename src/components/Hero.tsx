@@ -22,27 +22,23 @@ export const Hero = () => {
             />
           </div>
           <div className="flex flex-col items-center gap-2 mt-8 relative z-10 w-full">
-            <span className="text-3xl lg:text-2xl text-coal leading-tight font-technical lowercase font-black text-center px-2">hey there</span>
+            <span className="text-3xl lg:text-2xl text-coal leading-tight font-technical uppercase font-black text-center px-2">HEY THERE!</span>
             <motion.span
-              animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
+              animate={{ rotate: [0, 12, -8, 12, -4, 8, 0] }}
               transition={{
-                duration: 2.5,
+                duration: 2.2,
                 repeat: Infinity,
-                repeatDelay: 1,
                 ease: "easeInOut"
               }}
-              className="text-3xl inline-block"
+              style={{ originX: 0.5, originY: 1 }}
+              className="text-5xl inline-block"
             >
-              👋
+              🖐🏼
             </motion.span>
           </div>
         </div>
         
-        <div className="brutalist-block p-6 bg-white">
-          <p className="text-lg italic font-semibold leading-relaxed text-coal/70">
-            "High agency collaborative problem-solver"
-          </p>
-        </div>
+
       </aside>
 
       {/* Hero Central Pane */}

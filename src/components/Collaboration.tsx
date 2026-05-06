@@ -77,10 +77,6 @@ export const Footer = () => {
         <span>&copy; {currentYear} JOSHUA BACHA. ALL RIGHTS RESERVED.</span>
         <span className="italic">Everything you see here is under construction... including me.</span>
         <span>Built with intent in Ghana.</span>
-        <span className="flex gap-2 items-center">
-            <span className="w-2 h-2 bg-amber animate-pulse" />
-            EST. 2008
-        </span>
       </div>
     </footer>
   );

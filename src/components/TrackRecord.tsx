@@ -10,7 +10,6 @@ const TRACK_RECORDS = {
   ],
   roles: [
     { title: "Founder", meta: "Nova Genesis Studio (2026-Present)" },
-    { title: "Video Editor", meta: "Freelance (Present)" },
     { title: "President", meta: "PRESEC Robotics Club (2024-2025)" },
     { title: "Visual Storyteller", meta: "YouTube (Creative Direction)" }
   ]
@@ -48,7 +47,6 @@ export const TrackRecord = () => {
         <SectionHeader 
           number="02" 
           title="Track Record" 
-          subtitle="Milestones, roles, recognitions, and proof of execution."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
