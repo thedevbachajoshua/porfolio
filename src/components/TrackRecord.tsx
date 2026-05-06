@@ -36,7 +36,7 @@ const TrackSection = ({ title, items, colorClass, hoverBorderClass, hoverTextCla
 
 export const TrackRecord = () => {
   return (
-    <section className="py-24 px-6 md:px-12 bg-platinum text-coal">
+    <section className="py-24 px-6 md:px-12 bg-paper text-coal">
       <motion.div 
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
