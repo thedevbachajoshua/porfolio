@@ -4,7 +4,7 @@ import { Instagram, Linkedin, Youtube, Mail, MapPin } from 'lucide-react';
 
 export const Collaboration = () => {
   return (
-    <section className="py-32 px-6 md:px-12 bg-white text-coal text-center relative overflow-hidden border-t border-deep-blue/5">
+    <section className="py-32 px-6 md:px-12 bg-amber/10 text-coal text-center relative overflow-hidden border-t border-deep-blue/5">
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-deep-orange/10 rounded-full blur-[150px]" />
       </div>

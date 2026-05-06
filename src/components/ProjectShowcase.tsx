@@ -81,7 +81,7 @@ const PROJECTS = [
 
 export const ProjectShowcase = () => {
   return (
-    <section className="py-24 px-6 md:px-12 bg-white w-full">
+    <section className="py-24 px-6 md:px-12 bg-amber/10 w-full">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ export const ProjectShowcase = () => {
             <div className={`lg:col-span-7 relative group ${idx % 2 !== 0 ? 'lg:order-2' : ''}`}>
               <motion.div 
                 whileHover={!project.embed ? { scale: 0.995 } : undefined}
-                className="relative aspect-video overflow-hidden border border-deep-blue/10 bg-muted shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-transform duration-500 ease-out"
+                className="relative aspect-video overflow-hidden border border-deep-blue/10 bg-amber/5 shadow-[6px_6px_0px_0px_rgba(4,116,186,0.3)] transition-transform duration-500 ease-out"
               >
                 {project.embed ? (
                   <iframe 

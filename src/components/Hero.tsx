@@ -42,7 +42,7 @@ export const Hero = () => {
       </aside>
 
       {/* Hero Central Pane */}
-      <main className="relative bg-white brutalist-block p-8 md:p-12 flex flex-col justify-center overflow-hidden">
+      <main className="relative bg-amber/10 brutalist-block p-8 md:p-12 flex flex-col justify-center overflow-hidden">
         
         <motion.div
            initial={{ opacity: 0, y: 30 }}
