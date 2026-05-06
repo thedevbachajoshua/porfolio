@@ -37,7 +37,7 @@ export default function App() {
             }}
             className="font-display text-xl md:text-2xl tracking-tighter uppercase font-black cursor-pointer hover:text-deep-orange transition-colors"
           >
-            thebachajoshua™
+            JOSHUA MBA BACHA
           </a>
 
           <div className="hidden md:flex items-center gap-12 font-display uppercase tracking-widest text-xs font-black">
@@ -59,7 +59,7 @@ export default function App() {
           </div>
 
           <button 
-            className="md:hidden p-2 bg-deep-orange text-white shadow-[2px_2px_0px_0px_rgba(0,167,225,1)]"
+            className="md:hidden p-2 bg-coal text-white shadow-[2px_2px_0px_0px_rgba(0,167,225,1)]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X /> : <Menu />}
@@ -116,7 +116,7 @@ export default function App() {
               </div>
 
               <div className="mt-auto">
-                <p className="text-[10px] font-black uppercase tracking-widest opacity-30">thebachajoshua™ © 2026</p>
+                <p className="text-[10px] font-black uppercase tracking-widest opacity-30">JOSHUA MBA BACHA© 2026</p>
               </div>
             </motion.div>
           </>

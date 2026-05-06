@@ -44,7 +44,7 @@ export const Footer = () => {
     <footer id="site-footer" className="py-24 px-6 md:px-12 bg-paper text-coal border-t border-deep-blue/10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-8 flex flex-col gap-6">
-          <h2 className="text-5xl md:text-7xl font-display font-black tracking-tighter text-deep-orange">JOSHUA BACHA</h2>
+          <h2 className="text-5xl md:text-7xl font-display font-black tracking-tighter text-deep-orange">JOSHUA MBA BACHA</h2>
           <div className="flex items-center gap-2 text-sm font-bold opacity-60">
             <MapPin className="w-4 h-4" />
             <span>ACCRA, GHANA</span>
@@ -74,7 +74,7 @@ export const Footer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-deep-blue/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold uppercase tracking-widest opacity-40">
-        <span>&copy; {currentYear} JOSHUA BACHA. ALL RIGHTS RESERVED.</span>
+        <span>&copy; {currentYear} JOSHUA MBA BACHA. ALL RIGHTS RESERVED.</span>
         <span className="italic">Everything you see here is under construction... including me.</span>
         <span>Built with intent in Ghana.</span>
       </div>
