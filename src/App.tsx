@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Guestbook } from './components/Guestbook';
 import { Hero } from './components/Hero';
 import { ProofStrip } from './components/ProofStrip';
 import { ProjectShowcase } from './components/ProjectShowcase';
@@ -139,6 +140,9 @@ export default function App() {
         </div>
         <div id="contact">
           <Collaboration />
+        </div>
+        <div id="guestbook">
+          <Guestbook />
         </div>
       </main>
 

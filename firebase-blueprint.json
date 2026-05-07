@@ -1,0 +1,35 @@
+{
+  "entities": {
+    "GuestbookEntry": {
+      "title": "Guestbook Entry",
+      "description": "A message left by a visitor in the guestbook.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the visitor"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message/note left by the visitor"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the entry was created"
+        }
+      },
+      "required": [
+        "name",
+        "message",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "guestbook": {
+      "schema": "GuestbookEntry",
+      "description": "Collection of guestbook entries."
+    }
+  }
+}
