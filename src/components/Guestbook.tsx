@@ -127,7 +127,13 @@ export const Guestbook = () => {
   };
 
   return (
-    <section className="py-24 bg-paper overflow-hidden border-y border-coal/5 relative">
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, margin: "-100px" }}
+      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+      className="py-24 bg-amber/10 overflow-hidden border-y border-coal/5 relative"
+    >
       <div className="px-6 md:px-12 mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
         <div className="max-w-2xl">
           <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter leading-[0.8] mb-6">
@@ -170,11 +176,11 @@ export const Guestbook = () => {
               className="flex-shrink-0 w-72 h-72 p-8 bg-white border border-coal/10 brutalist-block shadow-[4px_4px_0px_0px_rgba(0,167,225,0.1)] flex flex-col justify-between"
             >
               <Quote className="w-8 h-8 text-deep-orange opacity-20" />
-              <p className="text-sm font-medium text-coal line-clamp-6 italic leading-relaxed">
+              <p className="text-2xl font-medium text-coal line-clamp-4 italic leading-tight">
                 "{entry.message}"
               </p>
               <div className="mt-4 pt-4 border-t border-coal/5">
-                <p className="font-display font-black uppercase text-[10px] tracking-widest text-deep-blue">
+                <p className="font-display font-black uppercase text-[10px] tracking-widest text-deep-orange">
                   {entry.name}
                 </p>
               </div>
@@ -263,6 +269,6 @@ export const Guestbook = () => {
           </div>
         )}
       </AnimatePresence>
-    </section>
+    </motion.section>
   );
 };

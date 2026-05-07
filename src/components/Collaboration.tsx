@@ -4,7 +4,7 @@ import { Instagram, Linkedin, Youtube, Mail, MapPin } from 'lucide-react';
 
 export const Collaboration = () => {
   return (
-    <section className="py-32 px-6 md:px-12 bg-amber/10 text-coal text-center relative overflow-hidden border-t border-deep-blue/5">
+    <section className="py-32 px-6 md:px-12 bg-paper text-coal text-center relative overflow-hidden border-t border-deep-blue/5">
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-deep-orange/10 rounded-full blur-[150px]" />
       </div>
@@ -41,7 +41,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer id="site-footer" className="py-24 px-6 md:px-12 bg-paper text-coal border-t border-deep-blue/10">
+    <footer id="site-footer" className="py-24 px-6 md:px-12 bg-amber/10 text-coal border-t border-deep-blue/10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-8 flex flex-col gap-6">
           <h2 className="text-5xl md:text-7xl font-display font-black tracking-tighter text-deep-orange">JOSHUA MBA BACHA</h2>

@@ -42,7 +42,7 @@ export default function App() {
           </a>
 
           <div className="hidden md:flex items-center gap-12 font-display uppercase tracking-widest text-xs font-black">
-            {['Work', 'History', 'Story', 'Capabilities'].map((item) => (
+            {['Work', 'History', 'Story', 'Capabilities', 'Guestbook'].map((item) => (
               <a 
                 key={item} 
                 href={`#${item.toLowerCase()}`}
@@ -96,7 +96,7 @@ export default function App() {
               </div>
 
               <div className="flex flex-col gap-6">
-                {['Work', 'History', 'Story', 'Capabilities'].map((item) => (
+                {['Work', 'History', 'Story', 'Capabilities', 'Guestbook'].map((item) => (
                   <motion.a 
                     key={item} 
                     href={`#${item.toLowerCase()}`}
@@ -138,11 +138,11 @@ export default function App() {
         <div id="capabilities">
           <WhatIBring />
         </div>
-        <div id="contact">
-          <Collaboration />
-        </div>
         <div id="guestbook">
           <Guestbook />
+        </div>
+        <div id="contact">
+          <Collaboration />
         </div>
       </main>
 
