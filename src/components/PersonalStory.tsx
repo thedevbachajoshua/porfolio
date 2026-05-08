@@ -1,71 +1,77 @@
 import { motion } from 'motion/react';
-import { SectionHeader } from './Shared';
 
 export const PersonalStory = () => {
   return (
-    <section className="py-24 px-6 md:px-12 bg-amber/10 text-coal overflow-hidden relative border-y border-deep-blue/5">
+    <section id="story" className="py-24 md:py-32 px-6 md:px-12 bg-amber/10 text-coal overflow-hidden relative border-y border-coal/5">
+      {/* Background Word */}
       <motion.div 
-        initial={{ scale: 2, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 0.1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute inset-0 flex items-center justify-center font-display font-black text-[30vw] select-none pointer-events-none text-deep-orange"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 0.05 }}
+        transition={{ duration: 2 }}
+        className="absolute inset-0 flex items-center justify-center font-display font-black text-[25vw] leading-[0.7] select-none pointer-events-none text-coal tracking-tighter"
       >
-        AMBITION
+        EXECUTION
       </motion.div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, margin: "-100px" }}
-        transition={{ duration: 1 }}
-        className="max-w-5xl mx-auto relative z-10"
-      >
-        <SectionHeader 
-          number="03" 
-          title="Personal Story" 
-          subtitle=""
-          className="!mb-6 md:!mb-10"
-          numberColor="text-deep-orange"
-        />
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-12">
-          <div className="lg:col-span-5 flex flex-col gap-8 text-2xl md:text-4xl font-black leading-[0.9] tracking-tighter uppercase italic py-4">
-            <p className="text-coal">
-              Young builder from Ghana. Driven by ambition, culture, and storytelling.
-            </p>
-            <p className="text-deep-orange/60">
-              Failure is part of the system. I'm building in public to show everything in between.
-            </p>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Left-Aligned Header Section */}
+        <div className="mb-20 md:mb-32">
+          <div className="flex items-center gap-4 mb-4">
+            <span className="font-display text-2xl md:text-4xl font-black text-deep-orange">03</span>
+            <div className="h-1 flex-1 bg-deep-blue/50" />
           </div>
+          <h2 className="text-5xl md:text-9xl font-display font-black uppercase tracking-tighter leading-[0.8]">
+            My Story
+          </h2>
+        </div>
+        
+        {/* Editorial Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-24">
           
-          <div className="lg:col-span-7 flex flex-col gap-10 p-8 md:p-16 brutalist-block bg-amber/5 shadow-[4px_4px_0px_0px_rgba(241,119,32,0.15)] border-amber/10 relative group">
-            
-            <div className="relative">
-              <h3 className="text-4xl md:text-6xl font-display font-black uppercase text-coal leading-[0.85] mb-8">The<br />Foundation</h3>
+          {/* Left Column: Manifesto */}
+          <div className="lg:col-span-6 flex flex-col gap-12">
+            <div className="flex flex-col gap-2">
+              <h3 className="text-3xl md:text-5xl font-display font-black uppercase tracking-tighter leading-none">
+                Think Deeply.<br />
+                Build Fast.<br />
+                Show The Process.
+              </h3>
             </div>
-            
-            <div className="flex flex-col gap-8 border-l-2 border-deep-orange/20 pl-8">
-              <p className="text-xl md:text-2xl leading-tight font-bold text-coal/80 tracking-tight">
-                Before media and brand building, I developed my execution mindset through robotics and technical problem solving. 
-              </p>
-              <p className="text-lg md:text-xl leading-relaxed text-coal/50 font-medium">
-                Developing hardware prototypes through collaboration taught me how to solve complex problems under constraints. That technical foundation now powers what I do.
+
+            <div className="flex flex-col gap-4">
+              <p className="text-xl md:text-3xl font-display font-black uppercase tracking-tight text-deep-orange leading-[1.1]">
+                Failure is not the opposite of building.<br />
+                It is part of the process.<br />
+                So I document all of it.
               </p>
             </div>
           </div>
-        </div>
 
-        <motion.div 
-          initial={{ width: 0 }}
-          whileInView={{ width: "100%" }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="h-px bg-deep-blue/10 mt-16 md:mt-20" 
-        />
-        
-        <div className="flex justify-between mt-8 font-display uppercase tracking-widest text-[10px] text-coal/40">
-          <span>Documenting the process, not just the outcome.</span>
+          {/* Right Column: Technical Credibility */}
+          <div className="lg:col-span-5 lg:col-start-8 flex flex-col gap-8 md:mt-2">
+             <div>
+                <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-coal/40">
+                  Where Execution Began
+                </h4>
+                <div className="flex flex-col gap-6 text-lg md:text-xl font-medium tracking-tight text-coal leading-snug">
+                  <p>
+                    Before cameras, brands, or storytelling, I was building robots, prototyping hardware, and solving technical problems under real constraints.
+                  </p>
+                  <p>
+                    That engineering mindset shaped how I work today.
+                  </p>
+                </div>
+             </div>
+
+             <div className="mt-12 pt-12 border-t border-coal/10">
+                <span className="text-[10px] font-black uppercase tracking-widest text-coal/30">
+                  
+                </span>
+             </div>
+          </div>
+
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

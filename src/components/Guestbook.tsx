@@ -128,29 +128,38 @@ export const Guestbook = () => {
 
   return (
     <motion.section 
+      id="guestbook"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, margin: "-100px" }}
       transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
       className="py-24 bg-amber/10 overflow-hidden border-y border-coal/5 relative"
     >
-      <div className="px-6 md:px-12 mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
-        <div className="max-w-2xl">
-          <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter leading-[0.8] mb-6">
-            Guest<br />book
-          </h2>
-          <p className="text-sm font-medium text-coal/60 uppercase tracking-widest">
-            A small corner for your thoughts, kind words, or just a hello.
-          </p>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-12 flex flex-col gap-12">
+        <div className="w-full">
+          <div className="flex items-center gap-4 mb-4">
+            <span className="font-display text-2xl md:text-4xl font-black text-deep-orange">05</span>
+            <div className="h-1 flex-1 bg-deep-blue/50" />
+          </div>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div>
+              <h2 className="text-5xl md:text-9xl font-display font-black uppercase tracking-tighter leading-[0.8]">
+                Guestbook
+              </h2>
+              <p className="max-w-md text-sm md:text-base text-coal/60 mt-4 font-bold uppercase tracking-widest border-l-2 border-deep-blue/30 pl-4 italic">
+                A small corner for your thoughts, kind words, or just a hello.
+              </p>
+            </div>
+            
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group flex items-center gap-3 px-8 py-4 bg-coal text-white font-display font-black uppercase text-sm shadow-[4px_4px_0px_0px_rgba(241,119,32,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(241,119,32,1)] transition-all active:translate-x-[0px] active:translate-y-[0px] active:shadow-none"
+            >
+              <MessageSquarePlus className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              Add Yours
+            </button>
+          </div>
         </div>
-        
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="group flex items-center gap-3 px-8 py-4 bg-coal text-white font-display font-black uppercase text-sm shadow-[4px_4px_0px_0px_rgba(241,119,32,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(241,119,32,1)] transition-all active:translate-x-[0px] active:translate-y-[0px] active:shadow-none"
-        >
-          <MessageSquarePlus className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-          Add Yours
-        </button>
       </div>
 
       {/* Horizontal Scrolling Loop */}

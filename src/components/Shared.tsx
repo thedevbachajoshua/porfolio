@@ -15,7 +15,7 @@ export const SectionHeader = ({ number, title, subtitle, className = "", numberC
     <div className={`mb-12 md:mb-24 flex flex-col gap-2 ${className}`}>
       <div className="flex items-center gap-4">
         <span className={`font-display text-2xl md:text-4xl leading-none font-black ${numberColor}`}>{number}</span>
-        <div className="h-px flex-1 bg-deep-blue/10" />
+        <div className="h-1 flex-1 bg-deep-blue/50" />
       </div>
       <h2 className="text-5xl md:text-9xl font-display leading-[0.8] text-coal font-black">{title}</h2>
       {subtitle && (
