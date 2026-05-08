@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, FormEvent } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
 import { db } from '../lib/firebase';
-import { MessageSquarePlus, X, Send, Quote } from 'lucide-react';
+import { MessageSquarePlus, X, Send, Quote, ArrowUp } from 'lucide-react';
 
 enum OperationType {
   CREATE = 'create',
@@ -278,6 +278,18 @@ export const Guestbook = () => {
           </div>
         )}
       </AnimatePresence>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-12 flex justify-center">
+        <motion.button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          whileHover={{ scale: 1.05, rotate: 1 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center gap-2 px-6 py-2 bg-white border-2 border-coal text-coal text-sm font-black rounded-full shadow-[4px_4px_0px_0px_rgba(241,119,32,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        >
+          back to top
+          <ArrowUp className="w-4 h-4" />
+        </motion.button>
+      </div>
     </motion.section>
   );
 };

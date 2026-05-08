@@ -35,6 +35,15 @@ export const Hero = () => {
             >
               🖐🏼
             </motion.span>
+
+            <motion.a 
+              href="#guestbook" 
+              whileHover={{ scale: 1.05, rotate: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 px-6 py-2 bg-white border-2 border-coal text-coal text-sm font-black rounded-full shadow-[4px_4px_0px_0px_rgba(241,119,32,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+            >
+              say hi :)
+            </motion.a>
           </div>
         </div>
         
