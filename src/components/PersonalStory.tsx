@@ -2,7 +2,14 @@ import { motion } from 'motion/react';
 
 export const PersonalStory = () => {
   return (
-    <section id="story" className="py-24 md:py-32 px-6 md:px-12 bg-amber/10 text-coal overflow-hidden relative border-y border-coal/5">
+    <motion.section 
+      id="story" 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, margin: "-100px" }}
+      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+      className="py-24 md:py-32 px-6 md:px-12 bg-amber/10 text-coal overflow-hidden relative border-y border-coal/5"
+    >
       {/* Background Word */}
       <motion.div 
         initial={{ opacity: 0 }}
@@ -72,6 +79,6 @@ export const PersonalStory = () => {
 
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
