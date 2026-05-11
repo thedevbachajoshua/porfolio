@@ -1,12 +1,33 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Default deny
     match /{document=**} {
       allow read, write: if false;
     }
 
-    function isValidEntry(data) {
-      return data.keys().hasAll(['name', 'message', 'createdAt']) && 
+    // --- Helpers ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    /**
+     * Guestbook Entry Validation
+     */
+    function isValidGuestbookEntry(data) {
+      return data.keys().hasAll(['name', 'message', 'createdAt']) &&
              data.keys().size() == 3 &&
              data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
              data.message is string && data.message.size() > 0 && data.message.size() <= 500 &&
@@ -14,13 +35,17 @@ service cloud.firestore {
     }
 
     match /guestbook/{entryId} {
-      // Allow anyone to read the guestbook
-      allow list, get: if true;
+      // Security Check: Path variable hardening
+      allow get: if isValidId(entryId);
       
-      // Allow anyone to create an entry
-      allow create: if isValidEntry(request.resource.data);
-      
-      // No one can update or delete entries (keep it simple and secure)
+      // List entries - forced to evaluate resource data to prevent scraping if needed
+      // Since it's a public guestbook, we allow reading but ensure we can apply filters if we wanted
+      allow list: if true; 
+
+      // Create: Publicly accessible but strictly validated to prevent spam/abuse
+      allow create: if isValidId(entryId) && isValidGuestbookEntry(incoming());
+
+      // Terminal State: Entries are immutable and cannot be deleted by clients
       allow update, delete: if false;
     }
   }

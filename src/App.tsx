@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Guestbook } from './components/Guestbook';
-import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { ProofStrip } from './components/ProofStrip';
 import { ProjectShowcase } from './components/ProjectShowcase';
@@ -26,7 +25,6 @@ export default function App() {
 
   return (
     <div className="relative bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden pt-16 md:pt-20">
-      <Analytics />
       <GrainOverlay />
       
       {/* Sticky Persistent Navbar */}
