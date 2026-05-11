@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { MagneticButton } from './Shared';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
 import assetsData from '../assets-data.json';
+import { StatusBubble } from './StatusBubble';
 
 export const Hero = () => {
   const mainPic = assetsData.mainPic;
@@ -11,7 +12,15 @@ export const Hero = () => {
       <div className="absolute top-1/4 -right-20 w-[40vw] h-[40vw] bg-deep-orange/5 rounded-full blur-[120px] -z-10" />
 
       {/* Sidebar Left */}
-      <aside className="flex flex-col gap-4">
+      <aside className="relative flex flex-col gap-4">
+        {/* Basquiat Crown Scribble */}
+        <div className="absolute -top-6 -left-6 w-16 h-16 text-deep-orange rotate-[-15deg] opacity-50 select-none pointer-events-none">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M10,40 L30,20 L50,40 L70,20 L90,40 L90,80 L10,80 Z" />
+            <path d="M20,60 L80,60" strokeDasharray="4 4" />
+          </svg>
+        </div>
+        
         <div className="flex-1 bg-amber/10 p-6 flex flex-col justify-center items-center relative overflow-hidden border border-deep-blue/10">
           <div className="w-1/2 lg:w-full aspect-[4/5] bg-white border border-deep-blue/20 overflow-hidden shadow-sm relative">
              <img 
@@ -22,6 +31,7 @@ export const Hero = () => {
             />
           </div>
           <div className="flex flex-col items-center gap-2 mt-8 relative z-10 w-full">
+            <StatusBubble className="md:hidden mb-4" />
             <span className="text-3xl lg:text-2xl text-coal leading-tight font-technical uppercase font-black text-center px-2">HEY THERE!</span>
             <motion.span
               animate={{ rotate: [0, 12, -8, 12, -4, 8, 0] }}
@@ -62,7 +72,9 @@ export const Hero = () => {
           <h1 className="text-[10vw] md:text-[82px] leading-[1] md:leading-[0.95] mb-8 font-display font-black text-coal">
             Your Favourite<br />
             <span className="text-sky-blue">18 y/o</span><br />
-            <span className="bg-deep-orange text-white px-2 md:px-4 leading-normal inline-block mt-2">FAILING IN PUBLIC</span>
+            <div className="relative inline-block mt-2">
+              <span className="bg-deep-orange text-white px-2 md:px-4 leading-normal relative z-10">FAILING IN PUBLIC</span>
+            </div>
           </h1>
           
           <div className="max-w-md">

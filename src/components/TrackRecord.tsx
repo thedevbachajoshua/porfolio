@@ -18,7 +18,7 @@ const TRACK_RECORDS = {
 const TrackSection = ({ title, items, colorClass, hoverBorderClass, hoverTextClass }: { title: string, items: { title: string, meta: string }[], colorClass: string, hoverBorderClass: string, hoverTextClass: string }) => (
   <div className="flex flex-col gap-8">
     <div className={`flex items-center gap-4 ${colorClass}`}>
-      <h3 className="text-3xl tracking-widest font-display font-black">{title}</h3>
+      <h3 className="text-3xl tracking-widest font-display font-black uppercase">{title}</h3>
     </div>
     <div className="flex flex-col gap-4">
       {items.map((item, i) => (

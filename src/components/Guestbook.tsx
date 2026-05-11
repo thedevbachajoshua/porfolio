@@ -56,6 +56,7 @@ interface GuestbookEntry {
   name: string;
   message: string;
   createdAt: any;
+  likes?: number;
 }
 
 export const Guestbook = () => {
@@ -214,20 +215,27 @@ export const Guestbook = () => {
         >
           {/* Double the entries for a seamless loop if there are entries */}
           {(entries.length > 0 ? [...entries, ...entries] : []).map((entry, idx) => (
-            <div
+            <motion.div
               key={`${entry.id}-${idx}`}
-              className="flex-shrink-0 w-72 h-72 p-8 bg-white border border-coal/10 brutalist-block shadow-[4px_4px_0px_0px_rgba(0,167,225,0.1)] flex flex-col justify-between"
+              whileHover={{ 
+                y: -10, 
+                rotate: idx % 2 === 0 ? 1 : -1,
+                boxShadow: "8px 8px 0px 0px rgba(241,119,32,1)" 
+              }}
+              className="flex-shrink-0 w-72 h-72 p-8 bg-white border border-coal/10 brutalist-block shadow-[4px_4px_0px_0px_rgba(0,167,225,0.1)] flex flex-col justify-between transition-shadow duration-300"
             >
               <Quote className="w-8 h-8 text-deep-orange opacity-20" />
               <p className="text-2xl font-medium text-coal line-clamp-4 italic leading-tight">
                 "{entry.message}"
               </p>
-              <div className="mt-4 pt-4 border-t border-coal/5">
-                <p className="font-display font-black uppercase text-[10px] tracking-widest text-deep-orange">
-                  {entry.name}
-                </p>
+              <div className="mt-4 pt-4 border-t border-coal/5 flex justify-between items-end">
+                <div>
+                  <p className="font-display font-black uppercase text-[10px] tracking-widest text-deep-orange">
+                    {entry.name}
+                  </p>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
           
           {entries.length === 0 && Array.from({ length: 6 }).map((_, i) => (
@@ -265,14 +273,16 @@ export const Guestbook = () => {
 
               <div className="mb-8">
                 <h3 className="text-3xl font-display font-black uppercase tracking-tighter mb-2">Leave a note</h3>
-                <p className="text-xs font-bold text-coal/50 uppercase tracking-widest">
+                <p className="text-xs font-bold text-coal/50 uppercase tracking-widest leading-relaxed">
                   Hiiiiii, Feel free to leave a quick note, a kind word, or even a poem... 🤷‍♂️
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-[10px] font-black uppercase tracking-widest mb-2 opacity-50">Your Name</label>
+                  <div className="flex justify-between items-end mb-2">
+                    <label className="block text-[10px] font-black uppercase tracking-widest opacity-50">Your Name</label>
+                  </div>
                   <input
                     required
                     type="text"
@@ -284,9 +294,15 @@ export const Guestbook = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-[10px] font-black uppercase tracking-widest mb-2 opacity-50">The Note</label>
+                  <div className="flex justify-between items-end mb-2">
+                    <label className="block text-[10px] font-black uppercase tracking-widest opacity-50">The Note</label>
+                    <span className={`text-[10px] font-black uppercase tracking-widest ${message.length > 65 ? 'text-red-500' : 'opacity-30'}`}>
+                      {message.length}/75
+                    </span>
+                  </div>
                   <textarea
                     required
+                    maxLength={75}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="The floor is yours"

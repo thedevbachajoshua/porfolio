@@ -7,14 +7,23 @@ import { ProjectShowcase } from './components/ProjectShowcase';
 import { TrackRecord } from './components/TrackRecord';
 import { PersonalStory } from './components/PersonalStory';
 import { WhatIBring } from './components/WhatIBring';
+import { StatusBubble } from './components/StatusBubble';
 import { Collaboration, Footer } from './components/Collaboration';
 import { GrainOverlay } from './components/Shared';
 import { Menu, X } from 'lucide-react';
+import { useScroll, useSpring } from 'motion/react';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
+  
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 500);
@@ -25,7 +34,14 @@ export default function App() {
 
   return (
     <div className="relative bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden pt-16 md:pt-20">
+      <StatusBubble className="hidden md:flex fixed bottom-8 right-8 z-[150]" />
       <GrainOverlay />
+      
+      {/* Scroll Progress Bar - Slightly thicker */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1.5 bg-deep-orange z-[101] origin-left"
+        style={{ scaleX }}
+      />
       
       {/* Sticky Persistent Navbar */}
       <nav className="fixed top-0 left-0 w-full z-[80] bg-white/95 backdrop-blur-md py-4 text-coal border-b border-deep-blue/10 shadow-sm">

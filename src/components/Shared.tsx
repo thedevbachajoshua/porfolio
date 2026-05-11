@@ -13,9 +13,16 @@ interface SectionHeaderProps {
 export const SectionHeader = ({ number, title, subtitle, className = "", numberColor = "text-deep-orange" }: SectionHeaderProps) => {
   return (
     <div className={`mb-12 md:mb-24 flex flex-col gap-2 ${className}`}>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 relative">
         <span className={`font-display text-2xl md:text-4xl leading-none font-black ${numberColor}`}>{number}</span>
         <div className="h-1 flex-1 bg-deep-blue/50" />
+        
+        {/* Decorative Crown for every section */}
+        <div className="absolute -top-12 right-0 w-12 h-12 text-coal/20 rotate-[15deg] select-none pointer-events-none hidden md:block">
+          <svg viewBox="0 0 100 100" fill="currentColor">
+            <path d="M10,40 L30,20 L50,40 L70,20 L90,40 L90,80 L10,80 Z" />
+          </svg>
+        </div>
       </div>
       <h2 className="text-5xl md:text-9xl font-display leading-[0.8] text-coal font-black">{title}</h2>
       {subtitle && (
