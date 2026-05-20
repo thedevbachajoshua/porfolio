@@ -222,13 +222,15 @@ export const Guestbook = () => {
                 rotate: idx % 2 === 0 ? 1 : -1,
                 boxShadow: "8px 8px 0px 0px rgba(241,119,32,1)" 
               }}
-              className="flex-shrink-0 w-72 h-72 p-8 bg-white border border-coal/10 brutalist-block shadow-[4px_4px_0px_0px_rgba(0,167,225,0.1)] flex flex-col justify-between transition-shadow duration-300"
+              className="flex-shrink-0 w-72 h-72 p-6 bg-white border border-coal/10 brutalist-block shadow-[4px_4px_0px_0px_rgba(0,167,225,0.1)] flex flex-col justify-between transition-shadow duration-300"
             >
-              <Quote className="w-8 h-8 text-deep-orange opacity-20" />
-              <p className="text-2xl font-medium text-coal line-clamp-4 italic leading-tight">
-                "{entry.message}"
-              </p>
-              <div className="mt-4 pt-4 border-t border-coal/5 flex justify-between items-end">
+              <Quote className="w-6 h-6 text-deep-orange opacity-20" />
+              <div className="flex-1 flex flex-col justify-center my-2 overflow-y-auto scrollbar-none min-h-0">
+                <p className="text-[15px] md:text-base font-bold text-coal italic leading-relaxed whitespace-pre-wrap break-words">
+                  "{entry.message}"
+                </p>
+              </div>
+              <div className="mt-2 pt-2 border-t border-coal/5 flex justify-between items-end">
                 <div>
                   <p className="font-display font-black uppercase text-[10px] tracking-widest text-deep-orange">
                     {entry.name}
