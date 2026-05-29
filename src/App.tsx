@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 import { Guestbook } from './components/Guestbook';
 import { Hero } from './components/Hero';
 import { ProofStrip } from './components/ProofStrip';
@@ -35,6 +36,9 @@ export default function App() {
 
   return (
     <div className="relative bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden pt-16 md:pt-20">
+      {/* Vercel Web Analytics tracker */}
+      <Analytics />
+
       {/* Custom structural paint sweep loading screen */}
       <Loader onComplete={() => setIsLoading(false)} />
 
