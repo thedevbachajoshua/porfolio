@@ -61,9 +61,6 @@ export const Footer = () => {
             <MapPin className="w-4 h-4" />
             <span>ACCRA, GHANA</span>
           </div>
-          <p className="text-lg font-medium max-w-md opacity-70">
-            Building stories, systems, and futures from the heart of Africa.
-          </p>
         </div>
 
         <div className="md:col-span-5 lg:col-span-4 flex flex-col gap-6 items-start md:items-end">
