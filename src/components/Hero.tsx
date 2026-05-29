@@ -33,18 +33,16 @@ export const Hero = () => {
           <div className="flex flex-col items-center gap-2 mt-8 relative z-10 w-full">
             <StatusBubble className="md:hidden mb-4" />
             <span className="text-3xl lg:text-2xl text-coal leading-tight font-technical uppercase font-black text-center px-2">HEY THERE!</span>
-            <motion.span
-              animate={{ rotate: [0, 12, -8, 12, -4, 8, 0] }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              style={{ originX: 0.5, originY: 1 }}
-              className="text-5xl inline-block"
-            >
-              🖐🏼
-            </motion.span>
+            <div className="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center overflow-hidden z-10 select-none pointer-events-none mt-2">
+              <video 
+                src="/bg.webm" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                className="w-full h-full object-contain scale-x-[-1]"
+              />
+            </div>
 
             <motion.a 
               href="#guestbook" 
