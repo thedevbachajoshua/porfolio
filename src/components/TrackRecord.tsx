@@ -67,14 +67,14 @@ export const TrackRecord = () => {
         </div>
 
         {/* Fun static CV download section with high-contrast tactile layout */}
-        <div className="mt-20 flex flex-col items-center justify-center border-t border-deep-blue/10 pt-16 text-center">
+        <div className="mt-20 flex flex-col items-end justify-end border-t border-deep-blue/10 pt-16 text-right">
           <span className="font-technical text-xs font-black uppercase tracking-[0.2em] text-coal/40 mb-4 animate-pulse">
             Want more?
           </span>
           <a
             href="/CV.pdf"
             download="Joshua_Mba_Bacha_CV.pdf"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-coal text-[#F5F5F7] font-display font-black uppercase text-xs tracking-wider transition-all duration-200 hover:bg-deep-orange hover:-translate-x-1 hover:-translate-y-1 active:translate-x-0 active:translate-y-0 shadow-[4px_4px_0px_0px_#00A7E1]"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-coal text-[#F5F5F7] font-display font-black uppercase text-xs tracking-wider transition-all duration-150 hover:bg-deep-orange hover:-translate-x-1 hover:-translate-y-1 active:translate-x-0 active:translate-y-0 shadow-[4px_4px_0px_0px_#00A7E1]"
           >
             My life in PDF
             <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
