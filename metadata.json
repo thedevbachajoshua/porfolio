@@ -2,5 +2,5 @@
   "name": "thebachajoshua™",
   "description": "Personal portfolio of Joshua Bacha—Founder, Visual Storyteller, and Technical Builder from Ghana. African Brutalist Basquiat Future aesthetic.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
