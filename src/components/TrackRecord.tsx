@@ -8,72 +8,81 @@ const INITIAL_SLIDES = [
     id: 1,
     image: "/ACITY.png",
     title: "Most Impactful Award: Acity Tech Expo",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-amber-600 via-orange-600 to-red-700"
   },
   {
     id: 2,
     image: "/PRPC.jpg",
     title: "Last Speech as PRESEC Robotics President",
-    aspect: "4/3"
+    aspect: "4/3",
+    gradient: "from-blue-900 via-indigo-950 to-black"
   },
   {
     id: 3,
     image: "/WRO.png",
-    title: "National Finalist: World Robotics Olympiad 25'",
-    aspect: "16/9"
+    title: "National Finalist: World Robotics Olympiad '25",
+    aspect: "16/9",
+    gradient: "from-emerald-800 via-teal-900 to-black"
   },
   {
     id: 4,
     image: "/COOLEST.jpg",
     title: "Participant: Coolest Projects Ghana",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-rose-600 via-pink-700 to-slate-900"
   },
   {
     id: 5,
     image: "/AIRTAD.JPG",
     title: "Quiz Team Volunteer: AIRTAD",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-teal-800 via-sky-900 to-slate-900"
   },
   {
     id: 6,
     image: "/CREATIVE.jpg",
     title: "2nd Runner Up: Acity Creativity Challenge",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-purple-800 via-violet-900 to-black"
   },
   {
     id: 7,
     image: "/MENTOR.png",
     title: "Honouring Mentors...",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-indigo-800 via-blue-900 to-slate-950"
   },
   {
     id: 8,
     image: "/SRC.jpg",
     title: "Chatting with the Boys",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-slate-800 via-zinc-900 to-neutral-900"
   },
   {
     id: 9,
     image: "/TECH.png",
     title: "Tech and Beyond Expo: Volunteer",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-cyan-800 via-sky-950 to-blue-950"
   },
   {
     id: 10,
     image: "/MC.jpg",
     title: "Co-MC at High School Event",
-    aspect: "16/9"
+    aspect: "16/9",
+    gradient: "from-fuchsia-800 via-pink-900 to-rose-950"
   }
 ];
 
 export const TrackRecord = () => {
   const [slides] = useState(INITIAL_SLIDES);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
   const [isHovered, setIsHovered] = useState(false);
 
-  // Preload all slide images on mount
+  // Eagerly preload all images on component mount to prime browser caches
   useEffect(() => {
     slides.forEach((slide) => {
       const img = new Image();
@@ -81,39 +90,22 @@ export const TrackRecord = () => {
     });
   }, [slides]);
 
+  // Autoplay effect that transitions slides every 3 seconds unless hovered
   useEffect(() => {
     if (isHovered) return;
 
-    const interval = setInterval(() => {
-      setDirection(1);
+    const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
     }, 3000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [isHovered, slides.length]);
 
-  const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? "100%" : "-100%",
-      opacity: 0
-    }),
-    center: {
-      x: "0%",
-      opacity: 1
-    },
-    exit: (dir: number) => ({
-      x: dir < 0 ? "100%" : "-100%",
-      opacity: 0
-    })
-  };
-
   const handlePrev = () => {
-    setDirection(-1);
     setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setDirection(1);
     setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
@@ -137,51 +129,56 @@ export const TrackRecord = () => {
         <div 
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="relative group/card w-full shadow-[8px_8px_0px_0px_#00A7E1] border-2 border-coal rounded-sm overflow-hidden bg-coal aspect-video"
+          className="relative group/card w-full shadow-[8px_8px_0px_0px_#00A7E1] border-2 border-coal rounded-sm overflow-hidden bg-coal aspect-[16/9]"
         >
           
-          {/* Animate-Presence for sliding transitions */}
+          {/* Continuous sliding track container ensuring all images remain mounted & fully decoded in DOM */}
           <div className="absolute inset-0 w-full h-full overflow-hidden">
-            <AnimatePresence initial={false} custom={direction}>
-              <motion.div
-                key={currentIndex}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="absolute inset-0 w-full h-full flex items-center justify-center bg-coal"
-              >
-                {imageErrors[currentSlide.id] ? (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-coal border border-[#00A7E1]/10 p-4 text-center select-none">
-                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 mb-2 animate-pulse">
-                      <span className="font-mono text-xs text-[#00A7E1] font-bold">
-                        {currentSlide.aspect === "4/3" ? "4:3" : "16:9"}
+            <motion.div
+              animate={{ x: `-${currentIndex * 100}%` }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} // High-performance hardware accelerated transition
+              className="flex w-full h-full"
+            >
+              {slides.map((slide) => (
+                <div
+                  key={slide.id}
+                  className="w-full h-full flex-shrink-0 flex items-center justify-center bg-coal relative"
+                >
+                  {imageErrors[slide.id] ? (
+                    <div className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-tr ${slide.gradient || 'from-coal to-slate-900'} p-8 text-center select-none`}>
+                      <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center bg-white/10 mb-4 animate-pulse">
+                        <span className="font-mono text-xs text-white uppercase tracking-wider font-extrabold">
+                          {slide.aspect || "16:9"}
+                        </span>
+                      </div>
+                      <p className="font-display text-lg sm:text-xl md:text-2xl font-black uppercase text-white/95 mb-4 max-w-2xl leading-tight tracking-tight">
+                        {slide.title}
+                      </p>
+                      <span className="font-technical text-[10px] font-black uppercase tracking-[0.2em] text-white/45 mb-1">
+                        IMAGE PATH: {slide.image}
+                      </span>
+                      <span className="font-mono text-[9px] text-white/30 max-w-xs leading-relaxed">
+                        Place your high-res file in the public folder to display here.
                       </span>
                     </div>
-                    <p className="font-technical text-[10px] font-black uppercase tracking-[0.2em] text-[#F5F5F7]/30 mb-1">
-                      Image Slot: {currentSlide.image}
-                    </p>
-                    <p className="font-mono text-[9px] text-white/20 max-w-xs leading-relaxed">
-                      Upload your high-res image named "{currentSlide.image.replace('/', '')}" to public folder to replace this placeholder.
-                    </p>
-                  </div>
-                ) : (
-                  <img 
-                    src={currentSlide.image} 
-                    alt={currentSlide.title}
-                    onError={() => setImageErrors(prev => ({ ...prev, [currentSlide.id]: true }))}
-                    referrerPolicy="no-referrer"
-                    className={`w-full h-full select-none ${
-                      currentSlide.aspect === "4/3" 
-                        ? "object-contain max-h-full py-4 bg-coal" 
-                        : "object-cover"
-                    }`}
-                  />
-                )}
-              </motion.div>
-            </AnimatePresence>
+                  ) : (
+                    <img 
+                      src={slide.image} 
+                      alt={slide.title}
+                      loading="eager"
+                      decoding="async"
+                      onError={() => setImageErrors(prev => ({ ...prev, [slide.id]: true }))}
+                      referrerPolicy="no-referrer"
+                      className={`w-full h-full select-none ${
+                        slide.aspect === "4/3" 
+                          ? "object-contain max-h-full py-4 bg-coal" 
+                          : "object-cover"
+                      }`}
+                    />
+                  )}
+                </div>
+              ))}
+            </motion.div>
           </div>
 
           {/* High-quality dark overlay gradient for readability */}
@@ -190,29 +187,38 @@ export const TrackRecord = () => {
           {/* Side Nav Arrows (as seen in the reference) */}
           <button 
             onClick={handlePrev}
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-10 sm:w-10 sm:h-12 bg-black/45 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/60 active:scale-95 transition-all outline-none rounded-r-md cursor-pointer"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-12 bg-black/45 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/60 active:scale-95 transition-all outline-none rounded-r-md cursor-pointer"
             aria-label="Previous Slide"
           >
-            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
           <button 
             onClick={handleNext}
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-10 sm:w-10 sm:h-12 bg-black/45 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/60 active:scale-95 transition-all outline-none rounded-l-md cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-12 bg-black/45 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/60 active:scale-95 transition-all outline-none rounded-l-md cursor-pointer"
             aria-label="Next Slide"
           >
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            <ChevronRight className="w-5 h-5" />
           </button>
 
           {/* Bottom Card Copy (Overlay Layer) */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 flex flex-col gap-2 sm:gap-3 md:gap-4 z-20 pointer-events-auto">
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 flex flex-col gap-3 md:gap-4 z-20 pointer-events-auto">
             
-            {/* Heavy bold interactive title */}
-            <h3 className="text-sm xs:text-base sm:text-2xl md:text-3xl font-display font-medium text-white tracking-tight leading-tight max-w-4xl drop-shadow-sm line-clamp-2 md:line-clamp-3">
-              {currentSlide.title}
-            </h3>
+            {/* Heavy bold interactive title with a fast crossfade key transition */}
+            <AnimatePresence mode="wait">
+              <motion.h3 
+                key={currentIndex}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.15 }}
+                className="text-lg sm:text-2xl md:text-3xl font-display font-medium text-white tracking-tight leading-tight max-w-4xl drop-shadow-sm line-clamp-3"
+              >
+                {currentSlide.title}
+              </motion.h3>
+            </AnimatePresence>
 
             {/* Footer Row (Progress Indicators Centered) */}
-            <div className="flex items-center justify-center mt-2 pt-2 sm:mt-3 sm:pt-3 border-t border-white/10 w-full">
+            <div className="flex items-center justify-center mt-3 pt-3 border-t border-white/10 w-full">
               
               {/* Precise Dynamic Progression Indicators (Dots with active pill bar) */}
               <div className="flex items-center gap-1.5">
@@ -220,7 +226,6 @@ export const TrackRecord = () => {
                   <button
                     key={idx}
                     onClick={() => {
-                      setDirection(idx > currentIndex ? 1 : -1);
                       setCurrentIndex(idx);
                     }}
                     className={`h-2 transition-all duration-200 rounded-full cursor-pointer outline-none ${
