@@ -2,7 +2,6 @@ import { motion, useInView } from 'motion/react';
 import { SectionHeader } from './Shared';
 import { Play, ExternalLink } from 'lucide-react';
 import React, { useRef, useEffect, useState } from 'react';
-import { HERO_VIDEO_BASE64 } from '../assets-video';
 
 const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poster?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -31,9 +30,6 @@ const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poste
     );
   }
 
-  // Use Base64 data if the path matches our hero video
-  const resolvedSrc = src === '/novagen.mp4' ? HERO_VIDEO_BASE64 : src;
-
   return (
     <div className="relative w-full h-full bg-coal">
       <video
@@ -43,11 +39,11 @@ const VideoPlayer = ({ src, title, poster }: { src: string, title: string, poste
         playsInline
         preload="auto"
         className="w-full h-full object-cover"
-        key={resolvedSrc}
+        key={src}
         poster={poster}
         onError={() => setHasError(true)}
       >
-        <source src={resolvedSrc} type="video/mp4" />
+        <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
