@@ -49,7 +49,8 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
-            <StatusBubble className="hidden md:flex fixed bottom-8 right-8 z-[150]" />
+            {/* Status bubble deactivated for now */}
+            {/* <StatusBubble className="hidden md:flex fixed bottom-8 right-8 z-[150]" /> */}
             
             {/* Scroll Progress Bar - Slightly thicker & Sharp */}
             <motion.div

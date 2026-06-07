@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { MagneticButton } from './Shared';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
 import assetsData from '../assets-data.json';
-import { StatusBubble } from './StatusBubble';
+// import { StatusBubble } from './StatusBubble';
 
 export const Hero = () => {
   const mainPic = assetsData.mainPic;
@@ -31,7 +31,8 @@ export const Hero = () => {
             />
           </div>
           <div className="flex flex-col items-center gap-2 mt-8 relative z-10 w-full">
-            <StatusBubble className="md:hidden mb-4" />
+            {/* Status bubble deactivated on mobile for now */}
+            {/* <StatusBubble className="md:hidden mb-4" /> */}
             <span className="text-3xl lg:text-2xl text-coal leading-tight font-technical uppercase font-black text-center px-2">HEY THERE!</span>
             <div className="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center overflow-hidden z-10 select-none pointer-events-none mt-2">
               <video 
