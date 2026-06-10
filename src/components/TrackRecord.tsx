@@ -78,7 +78,16 @@ const INITIAL_SLIDES = [
 
 export const TrackRecord = () => {
   const [slides] = useState(INITIAL_SLIDES);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Create an extended array: [last_slide, ...slides, first_slide] for infinite looping
+  const extendedSlides = [
+    slides[slides.length - 1],
+    ...slides,
+    slides[0]
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(1); // Starts at 1 (representing slides[0])
+  const [disableTransition, setDisableTransition] = useState(false);
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
   const [isHovered, setIsHovered] = useState(false);
 
@@ -95,21 +104,61 @@ export const TrackRecord = () => {
     if (isHovered) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      setActiveIndex((prev) => prev + 1);
     }, 3000);
 
     return () => clearInterval(timer);
-  }, [isHovered, slides.length]);
+  }, [isHovered]);
+
+  // Handle snapping transitions at boundaries to create the seamless looping illusion
+  useEffect(() => {
+    if (activeIndex === 0) {
+      // Transitioned to previous clone of the last slide. Delay and snap back to actual last slide.
+      const t = setTimeout(() => {
+        setDisableTransition(true);
+        setActiveIndex(slides.length);
+      }, 500); // matches the 500ms transition duration
+      return () => clearTimeout(t);
+    }
+    
+    if (activeIndex === slides.length + 1) {
+      // Transitioned to next clone of the first slide. Delay and snap back to actual first slide.
+      const t = setTimeout(() => {
+        setDisableTransition(true);
+        setActiveIndex(1);
+      }, 500); // matches the 500ms transition duration
+      return () => clearTimeout(t);
+    }
+  }, [activeIndex, slides.length]);
+
+  // Reset transition disabling on next tick
+  useEffect(() => {
+    if (disableTransition) {
+      const r = requestAnimationFrame(() => {
+        setDisableTransition(false);
+      });
+      return () => cancelAnimationFrame(r);
+    }
+  }, [disableTransition]);
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    if (activeIndex === 0) return; // Prevent double-clicks during correction
+    setActiveIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    if (activeIndex === slides.length + 1) return; // Prevent double-clicks during correction
+    setActiveIndex((prev) => prev + 1);
   };
 
-  const currentSlide = slides[currentIndex];
+  // Determine the real current active index for dot highlights and titles
+  const realIndex = activeIndex === 0
+    ? slides.length - 1
+    : activeIndex === slides.length + 1
+      ? 0
+      : activeIndex - 1;
+
+  const currentSlide = slides[realIndex];
 
   return (
     <section className="py-24 px-6 md:px-12 bg-paper text-coal">
@@ -135,13 +184,13 @@ export const TrackRecord = () => {
           {/* Continuous sliding track container ensuring all images remain mounted & fully decoded in DOM */}
           <div className="absolute inset-0 w-full h-full overflow-hidden">
             <motion.div
-              animate={{ x: `-${currentIndex * 100}%` }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} // High-performance hardware accelerated transition
+              animate={{ x: `-${activeIndex * 100}%` }}
+              transition={disableTransition ? { duration: 0 } : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="flex w-full h-full"
             >
-              {slides.map((slide) => (
+              {extendedSlides.map((slide, idx) => (
                 <div
-                  key={slide.id}
+                  key={`${slide.id}-${idx}`}
                   className="w-full h-full flex-shrink-0 flex items-center justify-center bg-coal relative"
                 >
                   {imageErrors[slide.id] ? (
@@ -206,7 +255,7 @@ export const TrackRecord = () => {
             {/* Heavy bold interactive title with a fast crossfade key transition */}
             <AnimatePresence mode="wait">
               <motion.h3 
-                key={currentIndex}
+                key={realIndex}
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
@@ -226,10 +275,10 @@ export const TrackRecord = () => {
                   <button
                     key={idx}
                     onClick={() => {
-                      setCurrentIndex(idx);
+                      setActiveIndex(idx + 1);
                     }}
                     className={`h-2 transition-all duration-200 rounded-full cursor-pointer outline-none ${
-                      idx === currentIndex 
+                      idx === realIndex 
                         ? "w-8 bg-white" 
                         : "w-2 bg-white/40 hover:bg-white/60"
                     }`}
