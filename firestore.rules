@@ -48,5 +48,31 @@ service cloud.firestore {
       // Terminal State: Entries are immutable and cannot be deleted by clients
       allow update, delete: if false;
     }
+
+    /**
+     * Supporter / Email List Validation
+     */
+    function isValidSupporter(data) {
+      return data.keys().hasAll(['email', 'createdAt', 'source']) &&
+             data.keys().size() >= 3 && data.keys().size() <= 7 &&
+             data.email is string && data.email.size() >= 4 && data.email.size() <= 254 &&
+             data.source is string && data.source.size() <= 50 &&
+             data.createdAt == request.time &&
+             (!('name' in data) || (data.name is string && data.name.size() <= 100)) &&
+             (!('note' in data) || (data.note is string && data.note.size() <= 500)) &&
+             (!('amount' in data) || (data.amount is number && data.amount >= 0 && data.amount <= 1000000)) &&
+             (!('reference' in data) || (data.reference is string && data.reference.size() <= 100));
+    }
+
+    match /supporters/{supporterId} {
+      // Security Check: PII Isolation - supporters list cannot be read or scraped from client
+      allow read: if false;
+
+      // Allow public creation with strict schema validation
+      allow create: if isValidId(supporterId) && isValidSupporter(incoming());
+
+      // Terminal State: Entries are immutable and cannot be updated or deleted by clients
+      allow update, delete: if false;
+    }
   }
 }

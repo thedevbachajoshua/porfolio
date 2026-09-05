@@ -11,13 +11,45 @@ import { WhatIBring } from './components/WhatIBring';
 import { StatusBubble } from './components/StatusBubble';
 import { Collaboration, Footer } from './components/Collaboration';
 import { Loader } from './components/Loader';
+import { Support } from './components/Support';
 import { Menu, X } from 'lucide-react';
 import { useScroll, useSpring } from 'motion/react';
 
+const checkIsSupportRoute = () => {
+  if (typeof window === 'undefined') return false;
+  const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+  const search = window.location.search.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  return (
+    path === '/support' ||
+    path === '/donate' ||
+    path === '/dono' ||
+    search.includes('support') ||
+    search.includes('donate') ||
+    search.includes('dono') ||
+    hash === '#support' ||
+    hash === '#donate' ||
+    hash === '#dono'
+  );
+};
+
 export default function App() {
+  const [isSupportPage, setIsSupportPage] = useState<boolean>(checkIsSupportRoute);
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setIsSupportPage(checkIsSupportRoute());
+    };
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
+    };
+  }, []);
   
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -33,6 +65,21 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // If accessed directly via /support, /donate, /dono or query/hash
+  if (isSupportPage) {
+    return (
+      <>
+        <Analytics />
+        <Support
+          onBackToHome={() => {
+            window.history.pushState({}, '', '/');
+            setIsSupportPage(false);
+          }}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="relative bg-paper text-coal font-sans selection:bg-deep-orange selection:text-white antialiased overflow-x-hidden pt-16 md:pt-20">
