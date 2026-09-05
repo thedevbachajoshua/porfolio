@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ChevronDown } from 'lucide-react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
 
@@ -52,8 +52,6 @@ function handleFirestoreError(error: unknown, operationType: OperationType, path
 }
 
 // Paystack Public Key
-// When your Paystack account is fully verified, you can replace this with pk_live_... 
-// or define VITE_PAYSTACK_PUBLIC_KEY in your deployment environment variables.
 const PAYSTACK_PUBLIC_KEY = 
   import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_test_2947262df1df97e3bf93a3907545b9644d780dc2';
 
@@ -61,12 +59,107 @@ interface SupportProps {
   onBackToHome?: () => void;
 }
 
-const PRESET_AMOUNTS = [5, 10, 20];
+export interface CurrencyConfig {
+  code: string;
+  symbol: string;
+  name: string;
+  flag: string;
+  presets: number[];
+  defaultPreset: number;
+  rateToGHS: number; // 1 unit of foreign currency = X GHS
+}
+
+export const CURRENCIES: Record<string, CurrencyConfig> = {
+  USD: {
+    code: 'USD',
+    symbol: '$',
+    name: 'US Dollar',
+    flag: '🇺🇸',
+    presets: [1, 5, 10],
+    defaultPreset: 5,
+    rateToGHS: 15.5,
+  },
+  GHS: {
+    code: 'GHS',
+    symbol: 'GH₵',
+    name: 'Ghanaian Cedi',
+    flag: '🇬🇭',
+    presets: [5, 10, 20],
+    defaultPreset: 10,
+    rateToGHS: 1.0,
+  },
+  NGN: {
+    code: 'NGN',
+    symbol: '₦',
+    name: 'Nigerian Naira',
+    flag: '🇳🇬',
+    presets: [1500, 5000, 10000],
+    defaultPreset: 5000,
+    rateToGHS: 0.010,
+  },
+  ZAR: {
+    code: 'ZAR',
+    symbol: 'R',
+    name: 'South African Rand',
+    flag: '🇿🇦',
+    presets: [20, 50, 100],
+    defaultPreset: 50,
+    rateToGHS: 0.85,
+  },
+  KES: {
+    code: 'KES',
+    symbol: 'KSh',
+    name: 'Kenyan Shilling',
+    flag: '🇰🇪',
+    presets: [150, 500, 1000],
+    defaultPreset: 500,
+    rateToGHS: 0.12,
+  },
+  RWF: {
+    code: 'RWF',
+    symbol: 'FRw',
+    name: 'Rwandan Franc',
+    flag: '🇷🇼',
+    presets: [1500, 5000, 10000],
+    defaultPreset: 5000,
+    rateToGHS: 0.011,
+  },
+};
+
+// Initial timezone detection helper
+function detectInitialCurrency(): string {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    if (tz.includes('Accra')) return 'GHS';
+    if (tz.includes('Lagos')) return 'NGN';
+    if (tz.includes('Johannesburg')) return 'ZAR';
+    if (tz.includes('Nairobi')) return 'KES';
+    if (tz.includes('Kigali')) return 'RWF';
+  } catch {
+    // default
+  }
+  return 'USD';
+}
+
+function mapCountryToCurrency(countryCode: string): string {
+  const code = countryCode.toUpperCase();
+  if (code === 'GH') return 'GHS';
+  if (code === 'NG') return 'NGN';
+  if (code === 'ZA') return 'ZAR';
+  if (code === 'KE') return 'KES';
+  if (code === 'RW') return 'RWF';
+  return 'USD';
+}
 
 export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
-  const [selectedPreset, setSelectedPreset] = useState<number | null>(10);
+  const [currencyCode, setCurrencyCode] = useState<string>(detectInitialCurrency);
+  const [isCurrencyDropdownOpen, setIsCurrencyDropdownOpen] = useState<boolean>(false);
+  const [userManuallySelected, setUserManuallySelected] = useState<boolean>(false);
+  const currencyMenuRef = useRef<HTMLDivElement>(null);
+
+  const activeCurrency = CURRENCIES[currencyCode] || CURRENCIES.USD;
+  const [selectedPreset, setSelectedPreset] = useState<number | null>(activeCurrency.defaultPreset);
   const [customAmount, setCustomAmount] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [note, setNote] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -74,8 +167,51 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
   const [paymentSuccess, setPaymentSuccess] = useState<{
     reference: string;
     amount: number;
+    currencySymbol: string;
+    currencyCode: string;
     donorName?: string;
   } | null>(null);
+
+  // Close currency dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (currencyMenuRef.current && !currencyMenuRef.current.contains(e.target as Node)) {
+        setIsCurrencyDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Detect visitor's country via lightweight Geo-IP
+  useEffect(() => {
+    if (userManuallySelected) return;
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2500);
+
+    fetch('https://api.country.is/', { signal: controller.signal })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.country && !userManuallySelected) {
+          const detected = mapCountryToCurrency(data.country);
+          if (CURRENCIES[detected]) {
+            setCurrencyCode(detected);
+            setSelectedPreset(CURRENCIES[detected].defaultPreset);
+            setCustomAmount('');
+          }
+        }
+      })
+      .catch(() => {
+        // Fallback already assigned synchronously from timezone
+      })
+      .finally(() => clearTimeout(timer));
+
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [userManuallySelected]);
 
   // Load Paystack Inline script on mount
   useEffect(() => {
@@ -84,15 +220,27 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
     script.src = 'https://js.paystack.co/v1/inline.js';
     script.async = true;
     document.body.appendChild(script);
-    return () => {
-      // Keep script or leave for subsequent visits
-    };
   }, []);
 
-  // Compute final amount in GHS
+  // Compute final amount in chosen currency
   const finalAmount = selectedPreset !== null 
     ? selectedPreset 
     : (parseFloat(customAmount) || 0);
+
+  // Calculate Paystack GHS equivalent charge
+  const ghsEquivalent = activeCurrency.code === 'GHS'
+    ? finalAmount
+    : Math.max(1, Math.round(finalAmount * activeCurrency.rateToGHS));
+
+  const handleCurrencySelect = (code: string) => {
+    setUserManuallySelected(true);
+    setCurrencyCode(code);
+    setIsCurrencyDropdownOpen(false);
+    const newConfig = CURRENCIES[code] || CURRENCIES.USD;
+    setSelectedPreset(newConfig.defaultPreset);
+    setCustomAmount('');
+    setErrorMessage(null);
+  };
 
   const handlePresetClick = (amount: number) => {
     setSelectedPreset(amount);
@@ -112,34 +260,33 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
 
     // Validation
     if (!finalAmount || finalAmount < 1) {
-      setErrorMessage('Please select or enter an amount of at least 1 GH₵.');
-      return;
-    }
-
-    if (!email || !email.includes('@') || !email.includes('.')) {
-      setErrorMessage('Please enter a valid email address so Paystack can send your receipt.');
+      setErrorMessage(`Please select or enter an amount of at least ${activeCurrency.symbol} 1.`);
       return;
     }
 
     const paystackPop = (window as any).PaystackPop;
     if (!paystackPop) {
-      setErrorMessage('Paystack is still loading. Please check your internet connection and try again in a few seconds.');
+      setErrorMessage('Paystack is still loading. Please check your connection and try again.');
       return;
     }
 
     setIsLoading(true);
 
-    // Save supporter to Firestore email list
+    // Paystack requires an email parameter even when receipts are turned off.
+    // We generate an anonymous transaction identifier so checkout completes seamlessly.
+    const transactionEmail = `supporter-${Date.now()}@thebachajoshua.site`;
+
+    // Save supporter record to Firestore
     const recordSupporter = async (paymentRef?: string) => {
       try {
         const payload: Record<string, any> = {
-          email: email.trim().toLowerCase(),
+          email: transactionEmail,
           source: 'support_page',
           createdAt: serverTimestamp(),
         };
         if (name.trim()) payload.name = name.trim();
         if (note.trim()) payload.note = note.trim();
-        if (finalAmount > 0) payload.amount = Number(finalAmount);
+        if (ghsEquivalent > 0) payload.amount = Number(ghsEquivalent);
         if (paymentRef) payload.reference = paymentRef;
 
         await addDoc(collection(db, 'supporters'), payload);
@@ -147,51 +294,56 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
         try {
           handleFirestoreError(error, OperationType.CREATE, 'supporters');
         } catch (e) {
-          console.warn('Supporter email list capture:', e);
+          console.warn('Supporter capture:', e);
         }
       }
     };
 
-    // Capture email list entry immediately
+    // Capture entry
     recordSupporter();
 
     try {
-      // Paystack expects amounts in the smallest currency unit (pesewas / kobo)
-      // 1 GHS = 100 pesewas
-      const amountInPesewas = Math.round(finalAmount * 100);
+      // Paystack charges in subunits (pesewas: 1 GHS = 100 pesewas)
+      const amountInPesewas = Math.round(ghsEquivalent * 100);
 
       const handler = paystackPop.setup({
         key: PAYSTACK_PUBLIC_KEY,
-        email: email.trim(),
+        email: transactionEmail,
         amount: amountInPesewas,
         currency: 'GHS',
         ref: `dono_${Date.now()}_${Math.floor(Math.random() * 1000000)}`,
         metadata: {
           custom_fields: [
             {
+              display_name: 'Selected Currency',
+              variable_name: 'selected_currency',
+              value: activeCurrency.code
+            },
+            {
+              display_name: 'Donation Amount',
+              variable_name: 'donation_amount',
+              value: `${activeCurrency.symbol} ${finalAmount}`
+            },
+            {
               display_name: 'Supporter Name',
               variable_name: 'supporter_name',
-              value: name.trim() || 'Anonymous Supporter'
+              value: name.trim() || 'Anonymous'
             },
             {
               display_name: 'Supporter Note',
               variable_name: 'supporter_note',
-              value: note.trim() || 'No note attached'
-            },
-            {
-              display_name: 'Channel / Project',
-              variable_name: 'project',
-              value: 'thebachajoshua YouTube & Visual Stories'
+              value: note.trim() || 'None'
             }
           ]
         },
         callback: (response: { reference: string }) => {
           setIsLoading(false);
-          // Record payment confirmation
           recordSupporter(response.reference);
           setPaymentSuccess({
             reference: response.reference,
             amount: finalAmount,
+            currencySymbol: activeCurrency.symbol,
+            currencyCode: activeCurrency.code,
             donorName: name.trim() || 'Friend'
           });
         },
@@ -274,7 +426,9 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
               <div className="p-4 bg-paper border border-coal/15 text-left mb-8 text-xs font-mono space-y-1.5">
                 <div className="flex justify-between">
                   <span className="text-coal/60 uppercase">Amount Contributed:</span>
-                  <span className="font-bold text-coal">GH₵ {paymentSuccess.amount.toFixed(2)}</span>
+                  <span className="font-bold text-coal">
+                    {paymentSuccess.currencySymbol} {paymentSuccess.amount.toLocaleString()} ({paymentSuccess.currencyCode})
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-coal/60 uppercase">Reference:</span>
@@ -290,7 +444,7 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
                 <button
                   onClick={() => {
                     setPaymentSuccess(null);
-                    setSelectedPreset(10);
+                    setSelectedPreset(activeCurrency.defaultPreset);
                     setCustomAmount('');
                     setNote('');
                   }}
@@ -321,21 +475,57 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
               exit={{ opacity: 0, y: -15 }}
               className="bg-white border-2 border-coal p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(26,26,26,1)] relative"
             >
-              {/* Header section */}
-              <div className="mb-6">
-                <h1 className="text-3xl md:text-5xl font-display font-black text-coal uppercase leading-tight tracking-tight mb-2">
-                  Support
-                </h1>
+              {/* Header section with currency selector */}
+              <div className="flex items-start justify-between gap-4 mb-6">
+                <div>
+                  <h1 className="text-3xl md:text-5xl font-display font-black text-coal uppercase leading-tight tracking-tight mb-2">
+                    Support
+                  </h1>
+                  <p className="text-sm text-coal/80 leading-relaxed font-medium">
+                    TYSM for clicking the link. You can support the channel and my work right here.
+                  </p>
+                </div>
 
-                <p className="text-sm text-coal/80 leading-relaxed font-medium">
-                  TYSM for clicking the link. You can support the channel and my work right here.
-                </p>
+                {/* Currency dropdown selector in corner */}
+                <div className="relative shrink-0" ref={currencyMenuRef}>
+                  <button
+                    type="button"
+                    onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-paper/80 border-2 border-coal/30 hover:border-coal text-xs font-black text-coal transition-all cursor-pointer shadow-[2px_2px_0px_0px_rgba(26,26,26,1)]"
+                    aria-label="Select currency"
+                  >
+                    <span className="text-sm">{activeCurrency.flag}</span>
+                    <span className="font-technical font-bold">{activeCurrency.code}</span>
+                    <ChevronDown className={`w-3.5 h-3.5 text-coal transition-transform ${isCurrencyDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {isCurrencyDropdownOpen && (
+                    <div className="absolute right-0 top-full mt-1.5 w-48 bg-white border-2 border-coal shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] z-50 py-1 max-h-64 overflow-y-auto">
+                      {Object.values(CURRENCIES).map((c) => (
+                        <button
+                          key={c.code}
+                          type="button"
+                          onClick={() => handleCurrencySelect(c.code)}
+                          className={`w-full px-3 py-2 text-left text-xs font-medium flex items-center justify-between hover:bg-deep-orange/10 hover:text-deep-orange cursor-pointer transition-colors ${
+                            c.code === activeCurrency.code ? 'bg-deep-orange/15 font-bold text-deep-orange' : 'text-coal'
+                          }`}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span className="text-base">{c.flag}</span>
+                            <span>{c.code}</span>
+                          </span>
+                          <span className="text-coal/60 font-mono text-[11px]">{c.symbol}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Amount Selection Section */}
               <div className="mb-6">
                 <div className="grid grid-cols-3 gap-3 mb-3">
-                  {PRESET_AMOUNTS.map((amount) => {
+                  {activeCurrency.presets.map((amount) => {
                     const isSelected = selectedPreset === amount;
                     return (
                       <button
@@ -349,7 +539,7 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
                         }`}
                       >
                         <span className="font-display text-lg md:text-xl font-black text-coal">
-                          GH₵ {amount}
+                          {activeCurrency.symbol} {amount.toLocaleString()}
                         </span>
                       </button>
                     );
@@ -359,7 +549,7 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
                 {/* Custom Amount Field */}
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <span className="font-display font-bold text-sm text-coal/60">GH₵</span>
+                    <span className="font-display font-bold text-sm text-coal/60">{activeCurrency.symbol}</span>
                   </div>
                   <input
                     type="text"
@@ -376,24 +566,8 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
                 </div>
               </div>
 
-              {/* Supporter Details */}
+              {/* Supporter Details (Email removed) */}
               <div className="space-y-3 mb-6 pt-4 border-t border-coal/10">
-                <div>
-                  <label className="block text-xs font-bold text-coal mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setErrorMessage(null);
-                    }}
-                    className="w-full px-3 py-2 bg-paper/60 border-2 border-coal/20 text-sm text-coal focus:outline-none focus:border-coal focus:bg-white transition-all"
-                  />
-                </div>
-
                 <div>
                   <div className="flex justify-between items-center mb-1">
                     <label className="text-xs font-bold text-coal">Name</label>
@@ -441,9 +615,17 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
                     Opening Paystack...
                   </span>
                 ) : (
-                  <span>Support With GH₵ {finalAmount > 0 ? finalAmount.toFixed(2) : '0.00'}</span>
+                  <span>
+                    Support With {activeCurrency.symbol} {finalAmount > 0 ? finalAmount.toLocaleString() : '0'}
+                  </span>
                 )}
               </button>
+
+              {activeCurrency.code !== 'GHS' && finalAmount > 0 && (
+                <p className="text-[11px] text-center text-coal/50 mt-2 font-medium">
+                  ≈ GH₵ {ghsEquivalent} via Paystack • your card/bank automatically converts to {activeCurrency.symbol}{finalAmount}
+                </p>
+              )}
 
               {/* Supported Payment Channels */}
               <div className="mt-4 pt-4 border-t border-coal/10 flex items-center justify-between text-[11px] text-coal/50 flex-wrap gap-2">
