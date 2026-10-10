@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, CheckCircle2, ChevronDown } from 'lucide-react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
+import { useGeoCurrency } from '../hooks/useGeoCurrency';
 
 enum OperationType {
   CREATE = 'create',
@@ -93,8 +94,8 @@ export const CURRENCIES: Record<string, CurrencyConfig> = {
     symbol: '₦',
     name: 'Nigerian Naira',
     flag: '🇳🇬',
-    presets: [1500, 5000, 10000],
-    defaultPreset: 5000,
+    presets: [500, 1000, 2000],
+    defaultPreset: 1000,
     rateToGHS: 0.010,
   },
   ZAR: {
@@ -102,59 +103,33 @@ export const CURRENCIES: Record<string, CurrencyConfig> = {
     symbol: 'R',
     name: 'South African Rand',
     flag: '🇿🇦',
-    presets: [20, 50, 100],
-    defaultPreset: 50,
-    rateToGHS: 0.85,
+    presets: [6, 12, 25],
+    defaultPreset: 12,
+    rateToGHS: 0.80,
   },
   KES: {
     code: 'KES',
     symbol: 'KSh',
     name: 'Kenyan Shilling',
     flag: '🇰🇪',
-    presets: [150, 500, 1000],
-    defaultPreset: 500,
-    rateToGHS: 0.12,
+    presets: [50, 100, 200],
+    defaultPreset: 100,
+    rateToGHS: 0.10,
   },
   RWF: {
     code: 'RWF',
     symbol: 'FRw',
     name: 'Rwandan Franc',
     flag: '🇷🇼',
-    presets: [1500, 5000, 10000],
-    defaultPreset: 5000,
-    rateToGHS: 0.011,
+    presets: [500, 1000, 2000],
+    defaultPreset: 1000,
+    rateToGHS: 0.010,
   },
 };
 
-// Initial timezone detection helper
-function detectInitialCurrency(): string {
-  try {
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-    if (tz.includes('Accra')) return 'GHS';
-    if (tz.includes('Lagos')) return 'NGN';
-    if (tz.includes('Johannesburg')) return 'ZAR';
-    if (tz.includes('Nairobi')) return 'KES';
-    if (tz.includes('Kigali')) return 'RWF';
-  } catch {
-    // default
-  }
-  return 'USD';
-}
-
-function mapCountryToCurrency(countryCode: string): string {
-  const code = countryCode.toUpperCase();
-  if (code === 'GH') return 'GHS';
-  if (code === 'NG') return 'NGN';
-  if (code === 'ZA') return 'ZAR';
-  if (code === 'KE') return 'KES';
-  if (code === 'RW') return 'RWF';
-  return 'USD';
-}
-
 export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
-  const [currencyCode, setCurrencyCode] = useState<string>(detectInitialCurrency);
+  const { currencyCode, setCurrencyCode } = useGeoCurrency();
   const [isCurrencyDropdownOpen, setIsCurrencyDropdownOpen] = useState<boolean>(false);
-  const [userManuallySelected, setUserManuallySelected] = useState<boolean>(false);
   const currencyMenuRef = useRef<HTMLDivElement>(null);
 
   const activeCurrency = CURRENCIES[currencyCode] || CURRENCIES.USD;
@@ -172,6 +147,13 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
     donorName?: string;
   } | null>(null);
 
+  // Sync selected preset when active currency changes automatically or manually
+  useEffect(() => {
+    if (!customAmount) {
+      setSelectedPreset(activeCurrency.defaultPreset);
+    }
+  }, [currencyCode, activeCurrency.defaultPreset]);
+
   // Close currency dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -182,36 +164,6 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  // Detect visitor's country via lightweight Geo-IP
-  useEffect(() => {
-    if (userManuallySelected) return;
-
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2500);
-
-    fetch('https://api.country.is/', { signal: controller.signal })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.country && !userManuallySelected) {
-          const detected = mapCountryToCurrency(data.country);
-          if (CURRENCIES[detected]) {
-            setCurrencyCode(detected);
-            setSelectedPreset(CURRENCIES[detected].defaultPreset);
-            setCustomAmount('');
-          }
-        }
-      })
-      .catch(() => {
-        // Fallback already assigned synchronously from timezone
-      })
-      .finally(() => clearTimeout(timer));
-
-    return () => {
-      clearTimeout(timer);
-      controller.abort();
-    };
-  }, [userManuallySelected]);
 
   // Load Paystack Inline script on mount
   useEffect(() => {
@@ -233,8 +185,7 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
     : Math.max(1, Math.round(finalAmount * activeCurrency.rateToGHS));
 
   const handleCurrencySelect = (code: string) => {
-    setUserManuallySelected(true);
-    setCurrencyCode(code);
+    setCurrencyCode(code, true);
     setIsCurrencyDropdownOpen(false);
     const newConfig = CURRENCIES[code] || CURRENCIES.USD;
     setSelectedPreset(newConfig.defaultPreset);
@@ -620,12 +571,6 @@ export const Support: React.FC<SupportProps> = ({ onBackToHome }) => {
                   </span>
                 )}
               </button>
-
-              {activeCurrency.code !== 'GHS' && finalAmount > 0 && (
-                <p className="text-[11px] text-center text-coal/50 mt-2 font-medium">
-                  ≈ GH₵ {ghsEquivalent} via Paystack • your card/bank automatically converts to {activeCurrency.symbol}{finalAmount}
-                </p>
-              )}
 
               {/* Supported Payment Channels */}
               <div className="mt-4 pt-4 border-t border-coal/10 flex items-center justify-between text-[11px] text-coal/50 flex-wrap gap-2">
