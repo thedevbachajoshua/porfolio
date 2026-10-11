@@ -69,8 +69,8 @@ const PROJECTS = [
     image: "https://images.unsplash.com/photo-1542204111-970c97b0a79a?q=80&w=2835",
     tags: ["Storytelling", "Editing", "Knowledge Sharing"],
     color: "bg-sky-blue",
-    link: "https://www.youtube.com/@thebachajoshua",
-    embed: "https://www.youtube.com/embed/o6mOGJRhqLI"
+    link: "https://www.youtube.com/watch?v=KiTvj34Rms4",
+    embed: "https://www.youtube.com/embed/KiTvj34Rms4"
   }
 ];
 
