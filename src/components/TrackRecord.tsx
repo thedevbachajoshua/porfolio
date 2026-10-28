@@ -292,7 +292,8 @@ export const TrackRecord = () => {
 
         </div>
 
-        {/* Fun static CV download section with high-contrast tactile layout */}
+        {/* Temporarily disabled PDF CV download section - kept in code for easy re-enabling */}
+        {/*
         <div className="mt-20 flex flex-col items-end justify-end border-t border-deep-blue/10 pt-16 text-right">
           <span className="font-technical text-xs font-black uppercase tracking-[0.2em] text-coal/40 mb-4 animate-pulse">
             Want more?
@@ -306,6 +307,7 @@ export const TrackRecord = () => {
             <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
           </a>
         </div>
+        */}
       </motion.div>
     </section>
   );
